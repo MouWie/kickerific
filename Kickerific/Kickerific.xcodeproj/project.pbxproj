@@ -24,6 +24,11 @@
 		63693DBC1B2F06D200211995 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63693DB61B2F06D100211995 /* ParseFacebookUtils.framework */; };
 		63693DBD1B2F06D200211995 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63693DB71B2F06D100211995 /* ParseFacebookUtilsV4.framework */; };
 		63693DBE1B2F06D200211995 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63693DB81B2F06D100211995 /* ParseUI.framework */; };
+		63693DC01B2F0E4B00211995 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 63693DBF1B2F0E4B00211995 /* libsqlite3.dylib */; };
+		63693DC31B2F0EF800211995 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63693DC21B2F0EF800211995 /* ServiceLocator.swift */; };
+		63693DC41B2F0EF800211995 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63693DC21B2F0EF800211995 /* ServiceLocator.swift */; };
+		63693DC61B2F10F300211995 /* Bootstrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63693DC51B2F10F300211995 /* Bootstrapper.swift */; };
+		63693DC71B2F10F300211995 /* Bootstrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63693DC51B2F10F300211995 /* Bootstrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +63,9 @@
 		63693DB61B2F06D100211995 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		63693DB71B2F06D100211995 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		63693DB81B2F06D100211995 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		63693DBF1B2F0E4B00211995 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		63693DC21B2F0EF800211995 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
+		63693DC51B2F10F300211995 /* Bootstrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bootstrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63693DC01B2F0E4B00211995 /* libsqlite3.dylib in Frameworks */,
 				63693DB91B2F06D100211995 /* Bolts.framework in Frameworks */,
 				63693DB21B2F06BD00211995 /* AudioToolbox.framework in Frameworks */,
 				63693DBE1B2F06D200211995 /* ParseUI.framework in Frameworks */,
@@ -110,6 +119,7 @@
 		63693D851B2F058800211995 /* Kickerific */ = {
 			isa = PBXGroup;
 			children = (
+				63693DC11B2F0E7900211995 /* BusinessLogic */,
 				63693D881B2F058800211995 /* AppDelegate.swift */,
 				63693D8A1B2F058800211995 /* FirstViewController.swift */,
 				63693D8C1B2F058800211995 /* SecondViewController.swift */,
@@ -149,6 +159,7 @@
 		63693DAC1B2F068C00211995 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				63693DBF1B2F0E4B00211995 /* libsqlite3.dylib */,
 				63693DB31B2F06D100211995 /* Bolts.framework */,
 				63693DB41B2F06D100211995 /* Parse.framework */,
 				63693DB51B2F06D100211995 /* ParseCrashReporting.framework */,
@@ -161,6 +172,15 @@
 				63693DAA1B2F068300211995 /* libstdc++.6.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		63693DC11B2F0E7900211995 /* BusinessLogic */ = {
+			isa = PBXGroup;
+			children = (
+				63693DC21B2F0EF800211995 /* ServiceLocator.swift */,
+				63693DC51B2F10F300211995 /* Bootstrapper.swift */,
+			);
+			name = BusinessLogic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,7 +283,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63693DC31B2F0EF800211995 /* ServiceLocator.swift in Sources */,
 				63693D8D1B2F058800211995 /* SecondViewController.swift in Sources */,
+				63693DC61B2F10F300211995 /* Bootstrapper.swift in Sources */,
 				63693D891B2F058800211995 /* AppDelegate.swift in Sources */,
 				63693D8B1B2F058800211995 /* FirstViewController.swift in Sources */,
 			);
@@ -273,6 +295,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63693DC71B2F10F300211995 /* Bootstrapper.swift in Sources */,
+				63693DC41B2F0EF800211995 /* ServiceLocator.swift in Sources */,
 				63693DA11B2F058900211995 /* KickerificTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
