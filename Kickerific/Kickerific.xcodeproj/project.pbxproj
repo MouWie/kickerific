@@ -43,7 +43,6 @@
 		638338CC1B3022B1003199CD /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 638338CB1B3022B1003199CD /* Test.m */; };
 		638338CD1B3022B1003199CD /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 638338CB1B3022B1003199CD /* Test.m */; };
 		638338CF1B30281B003199CD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338CE1B30281B003199CD /* LoginViewController.swift */; };
-		638338D01B30281B003199CD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338CE1B30281B003199CD /* LoginViewController.swift */; };
 		638338D21B3028A9003199CD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338D11B3028A9003199CD /* SignUpViewController.swift */; };
 		638338D31B3028A9003199CD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338D11B3028A9003199CD /* SignUpViewController.swift */; };
 		638338D51B302980003199CD /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63693DB31B2F06D100211995 /* Bolts.framework */; };
@@ -52,6 +51,7 @@
 		638338D81B302989003199CD /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63693DB61B2F06D100211995 /* ParseFacebookUtils.framework */; };
 		638338D91B30298C003199CD /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63693DB71B2F06D100211995 /* ParseFacebookUtilsV4.framework */; };
 		638338DA1B30298F003199CD /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63693DB81B2F06D100211995 /* ParseUI.framework */; };
+		638338DC1B30327A003199CD /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338DB1B30327A003199CD /* TabBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +100,7 @@
 		638338CB1B3022B1003199CD /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		638338CE1B30281B003199CD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		638338D11B3028A9003199CD /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		638338DB1B30327A003199CD /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +168,7 @@
 				63693DC11B2F0E7900211995 /* BusinessLogic */,
 				63693D881B2F058800211995 /* AppDelegate.swift */,
 				63693D8E1B2F058800211995 /* Main.storyboard */,
+				638338DB1B30327A003199CD /* TabBarViewController.swift */,
 				638338C91B3022B0003199CD /* Kickerific-Bridging-Header.h */,
 				638338CA1B3022B0003199CD /* KickerificTests-Bridging-Header.h */,
 				63693D911B2F058800211995 /* Images.xcassets */,
@@ -188,8 +190,8 @@
 			isa = PBXGroup;
 			children = (
 				63693DA01B2F058900211995 /* KickerificTests.swift */,
-				63693D9E1B2F058900211995 /* Supporting Files */,
 				638338BD1B3012CB003199CD /* GameSetupTest.swift */,
+				63693D9E1B2F058900211995 /* Supporting Files */,
 			);
 			path = KickerificTests;
 			sourceTree = "<group>";
@@ -362,6 +364,7 @@
 				638338C41B301D12003199CD /* UserManager.swift in Sources */,
 				638338CC1B3022B1003199CD /* Test.m in Sources */,
 				63693DC31B2F0EF800211995 /* ServiceLocator.swift in Sources */,
+				638338DC1B30327A003199CD /* TabBarViewController.swift in Sources */,
 				638338B81B300FBC003199CD /* GameManager.swift in Sources */,
 				63693D8D1B2F058800211995 /* SecondViewController.swift in Sources */,
 				638338C71B301D2B003199CD /* UserManagerProtocol.swift in Sources */,
@@ -389,7 +392,6 @@
 				63693DC41B2F0EF800211995 /* ServiceLocator.swift in Sources */,
 				638338C51B301D12003199CD /* UserManager.swift in Sources */,
 				63693DA11B2F058900211995 /* KickerificTests.swift in Sources */,
-				638338D01B30281B003199CD /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

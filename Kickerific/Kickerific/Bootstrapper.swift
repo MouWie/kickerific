@@ -14,7 +14,7 @@ public class Bootstrapper {
         
         //log.debug("[Bootstrapper] initializeServices()")
         ServiceLocator.sharedInstance.set(GameManagerProtocol.self, instance:GameManager())
-
+        ServiceLocator.sharedInstance.set(UserManagerProtocol.self, instance: UserManager())
     }
     
     public static func initializeParseFunctions() {
@@ -31,6 +31,12 @@ public class Bootstrapper {
     class var Game : GameManagerProtocol {
         get {
             return ServiceLocator.sharedInstance.get(GameManagerProtocol.self) as! GameManagerProtocol
+        }
+    }
+    
+    class var User: UserManagerProtocol {
+        get {
+            return ServiceLocator.sharedInstance.get(UserManagerProtocol.self) as! UserManagerProtocol
         }
     }
     

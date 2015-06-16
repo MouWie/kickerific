@@ -26,7 +26,7 @@ class GameSetupTest: XCTestCase {
         XCTAssert(true, "Pass")
     }
     
-    func test_shouldSetupAndStartGame_success() {
+    func test_shouldSetupAndStartGame_succeeds() {
         
         
         
