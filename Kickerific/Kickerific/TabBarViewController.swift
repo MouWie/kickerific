@@ -7,15 +7,24 @@
 //
 
 import UIKit
+import Parse
 
 class TabBarViewController: UITabBarController {
 
+    @IBOutlet weak var welcomeLabel: UILabel!
+    var userManager: UserManagerProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        //user must be logged in now
+        userManager = ServiceLocator.sharedInstance.get(UserManagerProtocol) as! UserManager
+        let currentUser:PFUser = userManager?.getCurrentUser() as! PFUser
+        
+        welcomeLabel.text = "Hello \(currentUser.username!)!"
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -32,4 +41,11 @@ class TabBarViewController: UITabBarController {
     }
     */
 
+    @IBAction func logoutUser(sender: AnyObject) {
+        
+        userManager?.logoutUser()
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+
+        })
+    }
 }

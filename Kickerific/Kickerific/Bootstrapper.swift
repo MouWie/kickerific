@@ -20,6 +20,7 @@ public class Bootstrapper {
     public static func initializeParseFunctions() {
         
         Player.initialize()
+        Player.registerSubclass()
         
     }
     

@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         userManager = ServiceLocator.sharedInstance.get(UserManagerProtocol) as! UserManager
+ 
         // Do any additional setup after loading the view.
 
     }
@@ -29,13 +30,14 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        var currentUser = PFUser.currentUser()
-        if currentUser != nil {
+        var currentUser: AnyObject? = userManager?.getCurrentUser()
+        if currentUser is PFUser {
             // Do stuff with the user
-            self.performSegueWithIdentifier("loginSegue", sender: nil)
-            
-        } else {
-            // Show the signup or login screen
+            userManager?.initialize({ (finished) -> () in
+                if(finished) {
+                   self.performSegueWithIdentifier("loginSegue", sender: nil)
+                }
+            })
         }
     }
     
@@ -61,9 +63,11 @@ class LoginViewController: UIViewController {
             (user: PFUser?, error: NSError?) -> Void in
             if user != nil {
                 // Do stuff after successful login.
-        
-                self.performSegueWithIdentifier("loginSegue", sender: sender)
-                
+                self.userManager?.initialize({ (finished) -> () in
+                    if(finished) {
+                       self.performSegueWithIdentifier("loginSegue", sender: sender)
+                    }
+                })
             } else {
                 // The login failed. Check error to see why.
                 let alert:UIAlertController = UIAlertController(title: "Login failed", message: "Something wrong with your credentials", preferredStyle: UIAlertControllerStyle.Alert)

@@ -52,6 +52,10 @@
 		638338D91B30298C003199CD /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63693DB71B2F06D100211995 /* ParseFacebookUtilsV4.framework */; };
 		638338DA1B30298F003199CD /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63693DB81B2F06D100211995 /* ParseUI.framework */; };
 		638338DC1B30327A003199CD /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338DB1B30327A003199CD /* TabBarViewController.swift */; };
+		638338DE1B305608003199CD /* PlayerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338DD1B305608003199CD /* PlayerTableViewController.swift */; };
+		638338E01B3060D3003199CD /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338DF1B3060D3003199CD /* Match.swift */; };
+		638338E11B3060D3003199CD /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338DF1B3060D3003199CD /* Match.swift */; };
+		638338E31B307081003199CD /* UserManagingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338E21B307081003199CD /* UserManagingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +105,9 @@
 		638338CE1B30281B003199CD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		638338D11B3028A9003199CD /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		638338DB1B30327A003199CD /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		638338DD1B305608003199CD /* PlayerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewController.swift; sourceTree = "<group>"; };
+		638338DF1B3060D3003199CD /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		638338E21B307081003199CD /* UserManagingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManagingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +198,7 @@
 			children = (
 				63693DA01B2F058900211995 /* KickerificTests.swift */,
 				638338BD1B3012CB003199CD /* GameSetupTest.swift */,
+				638338E21B307081003199CD /* UserManagingTests.swift */,
 				63693D9E1B2F058900211995 /* Supporting Files */,
 			);
 			path = KickerificTests;
@@ -247,6 +255,7 @@
 			children = (
 				638338C01B3013E1003199CD /* Player.swift */,
 				638338CB1B3022B1003199CD /* Test.m */,
+				638338DF1B3060D3003199CD /* Match.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -256,6 +265,7 @@
 			children = (
 				63693D8A1B2F058800211995 /* FirstViewController.swift */,
 				63693D8C1B2F058800211995 /* SecondViewController.swift */,
+				638338DD1B305608003199CD /* PlayerTableViewController.swift */,
 			);
 			name = TabControllers;
 			sourceTree = "<group>";
@@ -363,8 +373,10 @@
 				638338CF1B30281B003199CD /* LoginViewController.swift in Sources */,
 				638338C41B301D12003199CD /* UserManager.swift in Sources */,
 				638338CC1B3022B1003199CD /* Test.m in Sources */,
+				638338E01B3060D3003199CD /* Match.swift in Sources */,
 				63693DC31B2F0EF800211995 /* ServiceLocator.swift in Sources */,
 				638338DC1B30327A003199CD /* TabBarViewController.swift in Sources */,
+				638338DE1B305608003199CD /* PlayerTableViewController.swift in Sources */,
 				638338B81B300FBC003199CD /* GameManager.swift in Sources */,
 				63693D8D1B2F058800211995 /* SecondViewController.swift in Sources */,
 				638338C71B301D2B003199CD /* UserManagerProtocol.swift in Sources */,
@@ -387,11 +399,13 @@
 				638338BC1B301156003199CD /* GameManagerProtocol.swift in Sources */,
 				638338BE1B3012CB003199CD /* GameSetupTest.swift in Sources */,
 				638338CD1B3022B1003199CD /* Test.m in Sources */,
+				638338E31B307081003199CD /* UserManagingTests.swift in Sources */,
 				638338D31B3028A9003199CD /* SignUpViewController.swift in Sources */,
 				638338C21B3013E1003199CD /* Player.swift in Sources */,
 				63693DC41B2F0EF800211995 /* ServiceLocator.swift in Sources */,
 				638338C51B301D12003199CD /* UserManager.swift in Sources */,
 				63693DA11B2F058900211995 /* KickerificTests.swift in Sources */,
+				638338E11B3060D3003199CD /* Match.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,9 +42,14 @@ class SignUpViewController: UIViewController {
             if let error = error {
                 let errorString = error.userInfo?["error"] as? NSString
                 // Show the errorString somewhere and let the user try again.
-                self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                    
-                })
+                let alert:UIAlertController = UIAlertController(title: "SignUp failed", message: "Please concentrate", preferredStyle: UIAlertControllerStyle.Alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                    println(action)
+                }
+                alert.addAction(cancelAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+                
             } else {
                 // Hooray! Let them use the app now.
                 self.dismissViewControllerAnimated(true, completion: { () -> Void in
