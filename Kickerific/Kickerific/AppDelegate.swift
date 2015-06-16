@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //--------------------------------------
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        Bootstrapper.initializeServices()
+        
         // Enable storing and querying data from Local Datastore.
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         Parse.enableLocalDatastore()

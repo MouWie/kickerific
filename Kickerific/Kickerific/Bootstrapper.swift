@@ -8,23 +8,29 @@
 
 import Foundation
 
-class Bootstrapper {
+public class Bootstrapper {
     
-    private static func initializeServices() {
+    public static func initializeServices() {
         
-        /*log.debug("[Bootstrapper] initializeServices()")
-        ServiceLocator.sharedInstance.set(IConfigurationManager.self, instance:ConfigurationManager())
-        */
+        //log.debug("[Bootstrapper] initializeServices()")
+        ServiceLocator.sharedInstance.set(GameManagerProtocol.self, instance:GameManager())
+
+    }
+    
+    public static func initializeParseFunctions() {
+        
+        Player.initialize()
+        
     }
     
 }
 
 @objc class Managers {
     
-    /*
-    class var Widget : IWidgetManager {
+    
+    class var Game : GameManagerProtocol {
         get {
-            return ServiceLocator.sharedInstance.get(IWidgetManager.self) as! IWidgetManager
+            return ServiceLocator.sharedInstance.get(GameManagerProtocol.self) as! GameManagerProtocol
         }
     }
     
@@ -34,7 +40,7 @@ class Bootstrapper {
     return ServiceLocator.sharedInstance.get(INavigationManager.self) as! INavigationManager
     }
     }
-    */
+    
     
     class var Messenger : IMessenger {
         get {
