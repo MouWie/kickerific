@@ -85,7 +85,8 @@ class PlayerTableViewController: UITableViewController {
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cellActivated(cell!)
-
+        let timer = NSTimer(timeInterval: 10, target: self, selector: "cellReActivated:", userInfo: nil, repeats: false)
+        
     }
 
     /*
@@ -140,10 +141,9 @@ class PlayerTableViewController: UITableViewController {
         
     }
     
-    func cellReActivated(cell:UITableViewCell) {
+    func cellReActivated(userInfo: NSDictionary) {
         
-        cell.userInteractionEnabled = true
-        cell.alpha = 1
+        tableView.reloadData()
     }
     
     func getRandomColor() -> UIColor{

@@ -89,7 +89,7 @@ import Parse
         PFUser.logOut()
         _currentUser = PFUser.currentUser()
         let installation = PFInstallation.currentInstallation()
-        installation["user"] = nil
+        installation["user"] = NSNull()
         installation.save()
     }
     
