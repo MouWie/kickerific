@@ -101,8 +101,10 @@ import Parse
     }
     
     func getPlayerList() -> Array<Player> {
-        
-        return Array()
+        var query = PFQuery(className: "Player")
+        query.orderByAscending("name")
+        let array: Array<Player> = query.findObjects() as! Array<Player>
+        return array
         
     }
     

@@ -21,7 +21,7 @@ class TabBarViewController: UITabBarController {
         userManager = ServiceLocator.sharedInstance.get(UserManagerProtocol) as! UserManager
         let currentUser:PFUser = userManager?.getCurrentUser() as! PFUser
         
-        welcomeLabel.text = "Hello \(currentUser.username!)!"
+        welcomeLabel.text = "Hello \(currentUser.username!)! Ready to play?"
         
     }
     

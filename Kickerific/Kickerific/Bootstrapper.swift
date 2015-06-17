@@ -22,6 +22,11 @@ public class Bootstrapper {
         Player.initialize()
         Player.registerSubclass()
         
+        Match.initialize()
+        Match.registerSubclass()
+        
+        Team.initialize()
+        Team.registerSubclass()
     }
     
 }

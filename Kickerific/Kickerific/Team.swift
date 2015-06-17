@@ -1,23 +1,20 @@
 //
-//  Match.swift
+//  Team.swift
 //  Kickerific
 //
-//  Created by Mario on 16.06.15.
+//  Created by Mario Auernheimer on 17.06.15.
 //  Copyright (c) 2015 mantro.net. All rights reserved.
 //
 
 import Foundation
-
 import UIKit
 import Parse
 
-class Match : PFObject, PFSubclassing {
-    
-    @NSManaged var team1Score: NSNumber
-    @NSManaged var team2Score: NSNumber
-    @NSManaged var Team1: Team
-    @NSManaged var Team2: Team
-    @NSManaged var started: Bool
+class Team: PFObject, PFSubclassing {
+
+    @NSManaged var player1: Player
+    @NSManaged var player2: Player
+    @NSManaged var teamName: String
     
     override class func initialize() {
         struct Static {
@@ -29,6 +26,6 @@ class Match : PFObject, PFSubclassing {
     }
     
     static func parseClassName() -> String {
-        return "Match"
+        return "Team"
     }
 }

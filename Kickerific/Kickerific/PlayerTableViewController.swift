@@ -9,10 +9,17 @@
 import UIKit
 
 class PlayerTableViewController: UITableViewController {
-
+    
+    var userManager: UserManagerProtocol?
+    var playerArray: Array<Player>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.userManager = ServiceLocator.sharedInstance.get(UserManagerProtocol) as! UserManager
+        
+        playerArray = userManager?.getPlayerList()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -30,24 +37,28 @@ class PlayerTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return playerArray!.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        
+        let player = playerArray![indexPath.row] as Player
+        let text = player.name
+        cell.textLabel?.text = text
+        cell.contentView.backgroundColor = getRandomColor()
+        cell.textLabel?.backgroundColor = UIColor.clearColor()
 
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -93,5 +104,19 @@ class PlayerTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    func getRandomColor() -> UIColor{
+        
+        var randomRed:CGFloat = CGFloat(drand48())
+        
+        var randomGreen:CGFloat = CGFloat(drand48())
+        
+        var randomBlue:CGFloat = CGFloat(drand48())
+        
+        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
+        
+    }
+
 
 }
