@@ -84,8 +84,8 @@ class PlayerTableViewController: UITableViewController {
         challengeManager?.challengePlayer(playerToChallenge)
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cell?.userInteractionEnabled = false
-        cell?.alpha = 0.8
+        cellActivated(cell!)
+
     }
 
     /*
@@ -133,6 +133,18 @@ class PlayerTableViewController: UITableViewController {
     }
     */
     
+    func cellActivated(cell:UITableViewCell) {
+
+        cell.userInteractionEnabled = false
+        cell.alpha = 0.8
+        
+    }
+    
+    func cellReActivated(cell:UITableViewCell) {
+        
+        cell.userInteractionEnabled = true
+        cell.alpha = 1
+    }
     
     func getRandomColor() -> UIColor{
         

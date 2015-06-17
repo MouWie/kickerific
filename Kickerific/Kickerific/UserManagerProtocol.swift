@@ -30,7 +30,6 @@ import Parse
     *  save new Player instance, called when registrating the user
     */
     
-    
     func saveNewPlayer() -> Player
     
     /**
