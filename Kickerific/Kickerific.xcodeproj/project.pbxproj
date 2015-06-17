@@ -56,6 +56,8 @@
 		638338E01B3060D3003199CD /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338DF1B3060D3003199CD /* Match.swift */; };
 		638338E11B3060D3003199CD /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338DF1B3060D3003199CD /* Match.swift */; };
 		638338E31B307081003199CD /* UserManagingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338E21B307081003199CD /* UserManagingTests.swift */; };
+		ACD190F71B30D5AF00FC794C /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD190F61B30D5AF00FC794C /* Team.swift */; };
+		ACD190F81B30D5AF00FC794C /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD190F61B30D5AF00FC794C /* Team.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,7 @@
 		638338DD1B305608003199CD /* PlayerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewController.swift; sourceTree = "<group>"; };
 		638338DF1B3060D3003199CD /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		638338E21B307081003199CD /* UserManagingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManagingTests.swift; sourceTree = "<group>"; };
+		ACD190F61B30D5AF00FC794C /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,9 +256,10 @@
 		638338BF1B3013C8003199CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				638338C01B3013E1003199CD /* Player.swift */,
 				638338CB1B3022B1003199CD /* Test.m */,
 				638338DF1B3060D3003199CD /* Match.swift */,
+				638338C01B3013E1003199CD /* Player.swift */,
+				ACD190F61B30D5AF00FC794C /* Team.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -378,6 +382,7 @@
 				638338DC1B30327A003199CD /* TabBarViewController.swift in Sources */,
 				638338DE1B305608003199CD /* PlayerTableViewController.swift in Sources */,
 				638338B81B300FBC003199CD /* GameManager.swift in Sources */,
+				ACD190F71B30D5AF00FC794C /* Team.swift in Sources */,
 				63693D8D1B2F058800211995 /* SecondViewController.swift in Sources */,
 				638338C71B301D2B003199CD /* UserManagerProtocol.swift in Sources */,
 				638338BB1B301156003199CD /* GameManagerProtocol.swift in Sources */,
@@ -395,6 +400,7 @@
 			files = (
 				63693DC71B2F10F300211995 /* Bootstrapper.swift in Sources */,
 				638338C81B301D2B003199CD /* UserManagerProtocol.swift in Sources */,
+				ACD190F81B30D5AF00FC794C /* Team.swift in Sources */,
 				638338B91B300FBC003199CD /* GameManager.swift in Sources */,
 				638338BC1B301156003199CD /* GameManagerProtocol.swift in Sources */,
 				638338BE1B3012CB003199CD /* GameSetupTest.swift in Sources */,
