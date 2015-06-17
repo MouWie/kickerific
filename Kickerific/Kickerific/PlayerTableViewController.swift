@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import Parse
 
 class PlayerTableViewController: UITableViewController {
     
     var userManager: UserManagerProtocol?
+    var challengeManager: ChallengeProtocol?
     var playerArray: Array<Player>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.userManager = ServiceLocator.sharedInstance.get(UserManagerProtocol) as! UserManager
+        self.challengeManager = ServiceLocator.sharedInstance.get(ChallengeProtocol) as! ChallengeManager
         
         playerArray = userManager?.getPlayerList()
         
@@ -48,17 +51,42 @@ class PlayerTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        //let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+         let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         
+        
+        cell.textLabel?.textColor = UIColor.whiteColor()
+        cell.contentView.backgroundColor = UIColor.grayColor()//getRandomColor()
+        cell.textLabel?.backgroundColor = UIColor.clearColor()
+        cell.contentView.layer.cornerRadius = 5;
+        cell.contentView.layer.masksToBounds = true;
+        cell.imageView?.image = UIImage(named: "maxresdefault")
         let player = playerArray![indexPath.row] as Player
         let text = player.name
         cell.textLabel?.text = text
-        cell.contentView.backgroundColor = getRandomColor()
-        cell.textLabel?.backgroundColor = UIColor.clearColor()
-
+        if (text == PFUser.currentUser()?.username) {
+            cell.userInteractionEnabled = false
+            cell.contentView.backgroundColor = UIColor.darkGrayColor()
+            cell.textLabel?.textColor = UIColor.blackColor()
+            cell.detailTextLabel?.text = "You"
+            cell.detailTextLabel?.textColor = UIColor.whiteColor()
+            cell.imageView?.image = UIImage(named: "funnycat")
+        }
+        
+        
         return cell
     }
-
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // send push to receiver
+        let playerToChallenge = playerArray![indexPath.row] as Player
+        challengeManager?.challengePlayer(playerToChallenge)
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.userInteractionEnabled = false
+        cell?.alpha = 0.8
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -118,5 +146,8 @@ class PlayerTableViewController: UITableViewController {
         
     }
 
+    @IBAction func challengeBroadcast(sender: AnyObject) {
+        challengeManager?.broadcastChallenge()
+    }
 
 }

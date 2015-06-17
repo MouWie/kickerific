@@ -59,26 +59,23 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func login(sender: AnyObject) {
-        PFUser.logInWithUsernameInBackground(usernameTextField.text, password:passwordTextField.text) {
-            (user: PFUser?, error: NSError?) -> Void in
-            if user != nil {
-                // Do stuff after successful login.
-                self.userManager?.initialize({ (finished) -> () in
-                    if(finished) {
-                       self.performSegueWithIdentifier("loginSegue", sender: sender)
-                    }
-                })
-            } else {
-                // The login failed. Check error to see why.
+        
+        userManager?.loginUserWithPass(usernameTextField.text, password: passwordTextField.text, finished: { (error) -> () in
+            if(error != nil) {
                 let alert:UIAlertController = UIAlertController(title: "Login failed", message: "Something wrong with your credentials", preferredStyle: UIAlertControllerStyle.Alert)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
                     println(action)
                 }
                 alert.addAction(cancelAction)
                 self.presentViewController(alert, animated: true, completion: nil)
-                
             }
-        }
-        
+            else {
+                self.userManager?.initialize({ (finished) -> () in
+                    if(finished) {
+                        self.performSegueWithIdentifier("loginSegue", sender: sender)
+                    }
+                })
+            }
+        })
     }
 }

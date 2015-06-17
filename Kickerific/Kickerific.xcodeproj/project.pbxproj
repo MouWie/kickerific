@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		632C5B131B31792700737613 /* ChallengeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632C5B121B31792700737613 /* ChallengeManager.swift */; };
+		632C5B141B31792700737613 /* ChallengeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632C5B121B31792700737613 /* ChallengeManager.swift */; };
+		632C5B161B31793500737613 /* ChallengeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632C5B151B31793500737613 /* ChallengeProtocol.swift */; };
+		632C5B171B31793500737613 /* ChallengeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632C5B151B31793500737613 /* ChallengeProtocol.swift */; };
+		635CB57B1B31731100B4255F /* StorageManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635CB57A1B31731100B4255F /* StorageManagerProtocol.swift */; };
+		635CB57C1B31731100B4255F /* StorageManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635CB57A1B31731100B4255F /* StorageManagerProtocol.swift */; };
+		635CB57E1B31731C00B4255F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635CB57D1B31731C00B4255F /* StorageManager.swift */; };
+		635CB57F1B31731C00B4255F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635CB57D1B31731C00B4255F /* StorageManager.swift */; };
 		63693D891B2F058800211995 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63693D881B2F058800211995 /* AppDelegate.swift */; };
 		63693D8B1B2F058800211995 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63693D8A1B2F058800211995 /* FirstViewController.swift */; };
 		63693D8D1B2F058800211995 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63693D8C1B2F058800211995 /* SecondViewController.swift */; };
@@ -71,6 +79,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		632C5B121B31792700737613 /* ChallengeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeManager.swift; sourceTree = "<group>"; };
+		632C5B151B31793500737613 /* ChallengeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeProtocol.swift; sourceTree = "<group>"; };
+		635CB57A1B31731100B4255F /* StorageManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManagerProtocol.swift; sourceTree = "<group>"; };
+		635CB57D1B31731C00B4255F /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		63693D831B2F058800211995 /* Kickerific.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kickerific.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63693D871B2F058800211995 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63693D881B2F058800211995 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -249,6 +261,10 @@
 				638338BA1B301156003199CD /* GameManagerProtocol.swift */,
 				638338C31B301D12003199CD /* UserManager.swift */,
 				638338C61B301D2B003199CD /* UserManagerProtocol.swift */,
+				635CB57A1B31731100B4255F /* StorageManagerProtocol.swift */,
+				635CB57D1B31731C00B4255F /* StorageManager.swift */,
+				632C5B121B31792700737613 /* ChallengeManager.swift */,
+				632C5B151B31793500737613 /* ChallengeProtocol.swift */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -323,6 +339,7 @@
 				TargetAttributes = {
 					63693D821B2F058800211995 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 9368FVRTC3;
 					};
 					63693D991B2F058900211995 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -383,14 +400,18 @@
 				638338DE1B305608003199CD /* PlayerTableViewController.swift in Sources */,
 				638338B81B300FBC003199CD /* GameManager.swift in Sources */,
 				ACD190F71B30D5AF00FC794C /* Team.swift in Sources */,
+				635CB57E1B31731C00B4255F /* StorageManager.swift in Sources */,
 				63693D8D1B2F058800211995 /* SecondViewController.swift in Sources */,
 				638338C71B301D2B003199CD /* UserManagerProtocol.swift in Sources */,
 				638338BB1B301156003199CD /* GameManagerProtocol.swift in Sources */,
 				638338C11B3013E1003199CD /* Player.swift in Sources */,
 				63693DC61B2F10F300211995 /* Bootstrapper.swift in Sources */,
+				632C5B131B31792700737613 /* ChallengeManager.swift in Sources */,
 				63693D891B2F058800211995 /* AppDelegate.swift in Sources */,
+				632C5B161B31793500737613 /* ChallengeProtocol.swift in Sources */,
 				638338D21B3028A9003199CD /* SignUpViewController.swift in Sources */,
 				63693D8B1B2F058800211995 /* FirstViewController.swift in Sources */,
+				635CB57B1B31731100B4255F /* StorageManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63693DC71B2F10F300211995 /* Bootstrapper.swift in Sources */,
+				632C5B141B31792700737613 /* ChallengeManager.swift in Sources */,
 				638338C81B301D2B003199CD /* UserManagerProtocol.swift in Sources */,
 				ACD190F81B30D5AF00FC794C /* Team.swift in Sources */,
 				638338B91B300FBC003199CD /* GameManager.swift in Sources */,
@@ -406,12 +428,15 @@
 				638338BE1B3012CB003199CD /* GameSetupTest.swift in Sources */,
 				638338CD1B3022B1003199CD /* Test.m in Sources */,
 				638338E31B307081003199CD /* UserManagingTests.swift in Sources */,
+				635CB57C1B31731100B4255F /* StorageManagerProtocol.swift in Sources */,
 				638338D31B3028A9003199CD /* SignUpViewController.swift in Sources */,
 				638338C21B3013E1003199CD /* Player.swift in Sources */,
 				63693DC41B2F0EF800211995 /* ServiceLocator.swift in Sources */,
 				638338C51B301D12003199CD /* UserManager.swift in Sources */,
 				63693DA11B2F058900211995 /* KickerificTests.swift in Sources */,
 				638338E11B3060D3003199CD /* Match.swift in Sources */,
+				635CB57F1B31731C00B4255F /* StorageManager.swift in Sources */,
+				632C5B171B31793500737613 /* ChallengeProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +558,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -540,6 +567,7 @@
 				INFOPLIST_FILE = Kickerific/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kickerific/Kickerific-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -550,6 +578,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -557,6 +587,7 @@
 				INFOPLIST_FILE = Kickerific/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kickerific/Kickerific-Bridging-Header.h";
 			};
 			name = Release;

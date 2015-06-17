@@ -76,8 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         } else {
-            let types = UIRemoteNotificationType.Badge | UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound
-            application.registerForRemoteNotificationTypes(types)
+            let types = UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound
+            application.registerForRemoteNotifications()
         }
         
         return true
@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation.setDeviceTokenFromData(deviceToken)
         installation.saveInBackground()
         
-        PFPush.subscribeToChannelInBackground("", block: { (succeeded: Bool, error: NSError?) -> Void in
+        PFPush.subscribeToChannelInBackground("ChallengeAnyone", block: { (succeeded: Bool, error: NSError?) -> Void in
             if succeeded {
                 println("ParseStarterProject successfully subscribed to push notifications on the broadcast channel.");
             } else {

@@ -18,8 +18,41 @@ import Parse
         _currentUser = getCurrentUser() as? PFUser
         findPlayerForUser(_currentUser!.objectId!, finished: { (player) -> () in
             self._currentPlayer = player
-            finished(true)
+            
+            // Associate the device with a user, do it just if not done yet
+            let installation = PFInstallation.currentInstallation()
+            
+            if(installation["user"] == nil) {
+                installation["user"] = PFUser.currentUser()
+                installation.saveInBackgroundWithBlock({ (success, error) -> Void in
+                    if(error != nil) {
+                        installation.saveEventually(nil)
+                        finished(true)
+                    }
+                    else {
+                        finished(true)
+                    }
+                })
+            }
+            else {
+               finished(true)
+            }
+
         })
+    }
+    
+    func loginUserWithPass(username: String, password: String, finished: (NSError?)->()) {
+        
+        PFUser.logInWithUsernameInBackground(username, password:password) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if user != nil {
+                finished(nil)
+            } else {
+                // The login failed. Check error to see why.
+                let error = NSError(domain: error!.domain, code: error!.code, userInfo: error!.userInfo)
+                finished(error)
+            }
+        }
         
     }
     
@@ -33,7 +66,6 @@ import Parse
         player.numberOfDefeat = 0
         player.numberOfWins = 0
         player.kickerPoints = 0
-        
         player.saveInBackgroundWithBlock { (bool, error) -> Void in
             if(error != nil){
                 player.saveEventually({ (success, error) -> Void in
@@ -56,7 +88,9 @@ import Parse
         
         PFUser.logOut()
         _currentUser = PFUser.currentUser()
-        
+        let installation = PFInstallation.currentInstallation()
+        installation["user"] = nil
+        installation.save()
     }
     
     func getCurrentUser() -> AnyObject? {
@@ -108,6 +142,17 @@ import Parse
         
     }
     
-
+    func getUserWithID(idString: String, finished: (PFObject) -> ()) {
+        var query = PFUser.query()
+        
+        query!.getObjectInBackgroundWithId(idString) {
+            (user: PFObject?, error: NSError?) -> Void in
+            if error == nil && user != nil {
+                finished(user!)
+            } else {
+                println(error)
+            }
+        }
+    }
     
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Parse
 
 @objc protocol UserManagerProtocol {
     
@@ -14,6 +15,11 @@ import Foundation
     *  Initialize Service
     */
     func initialize(finished:(Bool)->())
+    
+    /**
+    *  login user
+    */
+    func loginUserWithPass(username: String, password: String, finished: (NSError?)->())
     
     /**
     *  logout user, reset current
@@ -33,7 +39,7 @@ import Foundation
     func getCurrentUser () -> AnyObject?
     
     /**
-    *  get user player
+    *  get the player object for the user
     */
     
     func findPlayerForUser(userID: String, finished:(Player)->())
@@ -45,9 +51,13 @@ import Foundation
     func getCurrentPlayer()->Player?
     
     /**
-    *  get list of registered users
+    *  get list of registered Players
     */
     
     func getPlayerList() -> Array<Player>
     
+    /**
+    *  get a user with id
+    */
+    func getUserWithID(idString: String, finished:(PFObject)->())
 }
