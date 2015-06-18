@@ -136,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userManager.findPlayerWithID(playerID!, finished: { (player) -> () in
             let challenge = challengeManager.createChallenge(player)
             let viewController = ChallengeViewController(challenge: challenge)
-            self.window?.rootViewController?.navigationController?.pushViewController(viewController, animated: true)
+            self.window?.rootViewController?.navigationController?.visibleViewController.presentViewController(viewController, animated: true, completion: nil)
         })
     }
     
