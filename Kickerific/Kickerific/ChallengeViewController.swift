@@ -11,9 +11,11 @@ import UIKit
 class ChallengeViewController: UIViewController {
     
     var _challenge: Challenge?
+    var _challengeManager: ChallengeProtocol?
     
     init(challenge: Challenge) {
         _challenge = challenge
+        _challengeManager = Managers.Challenge
         super.init(nibName: "ChallengeViewController", bundle: nil)
     }
     
@@ -46,12 +48,20 @@ class ChallengeViewController: UIViewController {
     
     @IBAction func denyChallenge(sender: AnyObject) {
         
-        
+        _challengeManager?.deleteChallenge(_challenge!)
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            // notify challenger
+            _challengeManager?.denyChallenge(_challenge!)
+        })
     }
     
     
     @IBAction func acceptChallenge(sender: AnyObject) {
         
-        
+        _challengeManager?.acceptChallenge(_challenge!)
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            //start Match Making ...
+            _challengeManager?.acceptChallenge(_challenge!)
+        })
     }
 }

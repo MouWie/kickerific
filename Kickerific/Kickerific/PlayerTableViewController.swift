@@ -136,6 +136,7 @@ class PlayerTableViewController: UITableViewController {
 
         //cell.userInteractionEnabled = false
         cell.alpha = 0.8
+        cell.detailTextLabel?.text = "challenged"
         
     }
     

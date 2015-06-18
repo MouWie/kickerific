@@ -23,6 +23,7 @@ class TabBarViewController: UITabBarController {
         
         welcomeLabel.text = "Hello \(currentUser.username!)! Ready to play?"
         
+        self.navigationController?.navigationItem.hidesBackButton = true
     }
     
     override func didReceiveMemoryWarning() {
