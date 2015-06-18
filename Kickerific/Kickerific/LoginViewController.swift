@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
             // Do stuff with the user
             userManager?.initialize({ (finished) -> () in
                 if(finished) {
-                   self.performSegueWithIdentifier("loginSegue", sender: nil)
+                   self.navigationController!.performSegueWithIdentifier("loginSegue", sender: nil)
                 }
             })
         }
@@ -73,7 +73,7 @@ class LoginViewController: UIViewController {
             else {
                 self.userManager?.initialize({ (finished) -> () in
                     if(finished) {
-                        self.performSegueWithIdentifier("loginSegue", sender: sender)
+                        self.navigationController!.performSegueWithIdentifier("loginSegue", sender: sender)
                     }
                 })
             }

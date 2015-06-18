@@ -135,11 +135,13 @@ import Parse
             
             let obj: Challenge = array![index] as! Challenge
             obj.unpin()
-            
+            UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber - 1
         }
     }
     
     func deleteChallenge(challenge: Challenge) {
+        
+        UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber - 1
         
         let challenge = Challenge(withoutDataWithObjectId: challenge.objectId)
         
