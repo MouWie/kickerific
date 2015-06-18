@@ -15,6 +15,12 @@
 		635CB57C1B31731100B4255F /* StorageManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635CB57A1B31731100B4255F /* StorageManagerProtocol.swift */; };
 		635CB57E1B31731C00B4255F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635CB57D1B31731C00B4255F /* StorageManager.swift */; };
 		635CB57F1B31731C00B4255F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635CB57D1B31731C00B4255F /* StorageManager.swift */; };
+		6365B2FB1B32F6D100F265F9 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6365B2FA1B32F6D100F265F9 /* Challenge.swift */; };
+		6365B2FC1B32F6D100F265F9 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6365B2FA1B32F6D100F265F9 /* Challenge.swift */; };
+		6365B2FF1B3303A400F265F9 /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6365B2FD1B3303A400F265F9 /* ChallengeViewController.swift */; };
+		6365B3001B3303A400F265F9 /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6365B2FD1B3303A400F265F9 /* ChallengeViewController.swift */; };
+		6365B3011B3303A400F265F9 /* ChallengeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6365B2FE1B3303A400F265F9 /* ChallengeViewController.xib */; };
+		6365B3021B3303A400F265F9 /* ChallengeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6365B2FE1B3303A400F265F9 /* ChallengeViewController.xib */; };
 		63693D891B2F058800211995 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63693D881B2F058800211995 /* AppDelegate.swift */; };
 		63693D8B1B2F058800211995 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63693D8A1B2F058800211995 /* FirstViewController.swift */; };
 		63693D8D1B2F058800211995 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63693D8C1B2F058800211995 /* SecondViewController.swift */; };
@@ -83,6 +89,9 @@
 		632C5B151B31793500737613 /* ChallengeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeProtocol.swift; sourceTree = "<group>"; };
 		635CB57A1B31731100B4255F /* StorageManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManagerProtocol.swift; sourceTree = "<group>"; };
 		635CB57D1B31731C00B4255F /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		6365B2FA1B32F6D100F265F9 /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		6365B2FD1B3303A400F265F9 /* ChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
+		6365B2FE1B3303A400F265F9 /* ChallengeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengeViewController.xib; sourceTree = "<group>"; };
 		63693D831B2F058800211995 /* Kickerific.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kickerific.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63693D871B2F058800211995 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63693D881B2F058800211995 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -182,7 +191,7 @@
 		63693D851B2F058800211995 /* Kickerific */ = {
 			isa = PBXGroup;
 			children = (
-				638338D41B3028B2003199CD /* TabControllers */,
+				638338D41B3028B2003199CD /* ViewControllers */,
 				638338CE1B30281B003199CD /* LoginViewController.swift */,
 				638338D11B3028A9003199CD /* SignUpViewController.swift */,
 				638338BF1B3013C8003199CD /* Model */,
@@ -276,18 +285,21 @@
 				638338DF1B3060D3003199CD /* Match.swift */,
 				638338C01B3013E1003199CD /* Player.swift */,
 				ACD190F61B30D5AF00FC794C /* Team.swift */,
+				6365B2FA1B32F6D100F265F9 /* Challenge.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
 		};
-		638338D41B3028B2003199CD /* TabControllers */ = {
+		638338D41B3028B2003199CD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6365B2FD1B3303A400F265F9 /* ChallengeViewController.swift */,
+				6365B2FE1B3303A400F265F9 /* ChallengeViewController.xib */,
 				63693D8A1B2F058800211995 /* FirstViewController.swift */,
 				63693D8C1B2F058800211995 /* SecondViewController.swift */,
 				638338DD1B305608003199CD /* PlayerTableViewController.swift */,
 			);
-			name = TabControllers;
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +385,7 @@
 			files = (
 				63693D901B2F058800211995 /* Main.storyboard in Resources */,
 				63693D951B2F058800211995 /* LaunchScreen.xib in Resources */,
+				6365B3011B3303A400F265F9 /* ChallengeViewController.xib in Resources */,
 				63693D921B2F058800211995 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +394,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6365B3021B3303A400F265F9 /* ChallengeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,7 +419,9 @@
 				638338C71B301D2B003199CD /* UserManagerProtocol.swift in Sources */,
 				638338BB1B301156003199CD /* GameManagerProtocol.swift in Sources */,
 				638338C11B3013E1003199CD /* Player.swift in Sources */,
+				6365B2FF1B3303A400F265F9 /* ChallengeViewController.swift in Sources */,
 				63693DC61B2F10F300211995 /* Bootstrapper.swift in Sources */,
+				6365B2FB1B32F6D100F265F9 /* Challenge.swift in Sources */,
 				632C5B131B31792700737613 /* ChallengeManager.swift in Sources */,
 				63693D891B2F058800211995 /* AppDelegate.swift in Sources */,
 				632C5B161B31793500737613 /* ChallengeProtocol.swift in Sources */,
@@ -419,11 +435,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6365B2FC1B32F6D100F265F9 /* Challenge.swift in Sources */,
 				63693DC71B2F10F300211995 /* Bootstrapper.swift in Sources */,
 				632C5B141B31792700737613 /* ChallengeManager.swift in Sources */,
 				638338C81B301D2B003199CD /* UserManagerProtocol.swift in Sources */,
 				ACD190F81B30D5AF00FC794C /* Team.swift in Sources */,
 				638338B91B300FBC003199CD /* GameManager.swift in Sources */,
+				6365B3001B3303A400F265F9 /* ChallengeViewController.swift in Sources */,
 				638338BC1B301156003199CD /* GameManagerProtocol.swift in Sources */,
 				638338BE1B3012CB003199CD /* GameSetupTest.swift in Sources */,
 				638338CD1B3022B1003199CD /* Test.m in Sources */,

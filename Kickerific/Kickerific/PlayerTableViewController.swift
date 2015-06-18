@@ -85,8 +85,6 @@ class PlayerTableViewController: UITableViewController {
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cellActivated(cell!)
-        let timer = NSTimer(timeInterval: 10, target: self, selector: "cellReActivated:", userInfo: nil, repeats: false)
-        
     }
 
     /*
@@ -136,7 +134,7 @@ class PlayerTableViewController: UITableViewController {
     
     func cellActivated(cell:UITableViewCell) {
 
-        cell.userInteractionEnabled = false
+        //cell.userInteractionEnabled = false
         cell.alpha = 0.8
         
     }

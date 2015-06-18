@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChallengeViewController" customModule="Kickerific" customModuleProvider="target">
+            <connections>
+                <outlet property="denyChallenge" destination="GcM-ov-cqg" id="k1g-Y9-xGg"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZr-tC-Bu7">
+                    <rect key="frame" x="224" y="125" width="152" height="74"/>
+                    <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="152" id="Poz-Bi-fJc"/>
+                        <constraint firstAttribute="height" constant="74" id="fla-FT-6AI"/>
+                    </constraints>
+                    <state key="normal" title="Accept">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="acceptChallenge:" destination="-1" eventType="touchUpInside" id="8aa-7V-xEW"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcM-ov-cqg">
+                    <rect key="frame" x="224" y="263" width="152" height="61"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="61" id="hsL-cV-Lrg"/>
+                    </constraints>
+                    <state key="normal" title="Deny">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="denyChallenge:" destination="-1" eventType="touchUpInside" id="rlD-KM-eBv"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="GcM-ov-cqg" firstAttribute="top" secondItem="cZr-tC-Bu7" secondAttribute="bottom" constant="64" id="76c-rH-Ka2"/>
+                <constraint firstItem="cZr-tC-Bu7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="125" id="CnT-0r-3Dy"/>
+                <constraint firstItem="cZr-tC-Bu7" firstAttribute="leading" secondItem="GcM-ov-cqg" secondAttribute="leading" id="aY7-00-0Bz"/>
+                <constraint firstAttribute="centerX" secondItem="cZr-tC-Bu7" secondAttribute="centerX" id="g4I-yS-Lxk"/>
+                <constraint firstItem="cZr-tC-Bu7" firstAttribute="trailing" secondItem="GcM-ov-cqg" secondAttribute="trailing" id="xXJ-Gj-YiU"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

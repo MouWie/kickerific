@@ -9,6 +9,10 @@
 import Foundation
 
 @objc protocol ChallengeProtocol {
+    /**
+    *  initialize the manager with properties
+    */
+    func initialize()
     
     /**
     *  Boradcast to all registered Users
@@ -24,4 +28,10 @@ import Foundation
     *  Broadcast to specific players
     */
     func challengePlayers(players:Array<Player>)
+    
+    /**
+    *  Creates a new challenge with a player
+    */
+    
+    func createChallenge(player:Player) -> Challenge
 }

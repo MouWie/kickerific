@@ -22,7 +22,19 @@ import Parse
             // Associate the device with a user, do it just if not done yet
             let installation = PFInstallation.currentInstallation()
             
-            if(installation["user"] == nil) {
+            if (installation["user"] == nil){
+                installation["user"] = PFUser.currentUser()
+                installation.saveInBackgroundWithBlock({ (success, error) -> Void in
+                    if(error != nil) {
+                        installation.saveEventually(nil)
+                        finished(true)
+                    }
+                    else {
+                        finished(true)
+                    }
+                })
+            }
+            else if (installation["user"] is NSNull) {
                 installation["user"] = PFUser.currentUser()
                 installation.saveInBackgroundWithBlock({ (success, error) -> Void in
                     if(error != nil) {
@@ -127,6 +139,15 @@ import Parse
         }
     }
     
+    func findPlayerWithID(playerID: String, finished:(Player)->()) {
+        
+        var query = PFQuery(className:"Player")
+        query.whereKey("objectId", equalTo:playerID)
+        let array = query.findObjects()
+        if (array?.count > 0) {
+            finished(array?.first as! Player)
+        }
+    }
     
     func updatePlayerStats() {
         

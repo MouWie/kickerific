@@ -29,6 +29,9 @@ public class Bootstrapper {
         
         Team.initialize()
         Team.registerSubclass()
+        
+        Challenge.initialize()
+        Challenge.registerSubclass()
     }
     
 }

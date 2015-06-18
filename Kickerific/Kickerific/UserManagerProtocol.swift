@@ -43,6 +43,12 @@ import Parse
     
     func findPlayerForUser(userID: String, finished:(Player)->())
     
+    /**
+    *  get the player
+    */
+    
+    func findPlayerWithID(playerID: String, finished:(Player)->())
+    
     
     /**
     *  func get currentPlayer

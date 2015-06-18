@@ -1,30 +1,32 @@
 //
-//  TabBarViewController.swift
+//  ChallengeViewController.swift
 //  Kickerific
 //
-//  Created by Mario on 16.06.15.
+//  Created by Mario on 18.06.15.
 //  Copyright (c) 2015 mantro.net. All rights reserved.
 //
 
 import UIKit
-import Parse
 
-class TabBarViewController: UITabBarController {
-
-    @IBOutlet weak var welcomeLabel: UILabel!
-    var userManager: UserManagerProtocol?
+class ChallengeViewController: UIViewController {
+    
+    var _challenge: Challenge?
+    
+    init(challenge: Challenge) {
+        _challenge = challenge
+        super.init(nibName: "ChallengeViewController", bundle: nil)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //user must be logged in now
-        userManager = ServiceLocator.sharedInstance.get(UserManagerProtocol) as! UserManager
-        let currentUser:PFUser = userManager?.getCurrentUser() as! PFUser
-        
-        welcomeLabel.text = "Hello \(currentUser.username!)! Ready to play?"
-        
+
+        // Do any additional setup after loading the view.
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -41,9 +43,15 @@ class TabBarViewController: UITabBarController {
     }
     */
 
-    @IBAction func logoutUser(sender: AnyObject) {
+    
+    @IBAction func denyChallenge(sender: AnyObject) {
         
-        userManager?.logoutUser()
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        
+    }
+    
+    
+    @IBAction func acceptChallenge(sender: AnyObject) {
+        
+        
     }
 }

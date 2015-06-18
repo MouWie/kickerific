@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationItem.hidesBackButton = true
         userManager = ServiceLocator.sharedInstance.get(UserManagerProtocol) as! UserManager
  
         // Do any additional setup after loading the view.

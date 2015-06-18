@@ -80,6 +80,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotifications()
         }
         
+        //Initialize Challenge Manager, get already stored challanges
+        let challengeManager = Managers.Challenge
+        challengeManager.initialize()
+        
+        //User Notification 
+        if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
+            let userManager = Managers.User
+            // get the player Object
+            let playerID = notificationPayload["p"] as? String
+            
+            userManager.findPlayerWithID(playerID!, finished: { (player) -> () in
+                let challenge = challengeManager.createChallenge(player)
+                let viewController = ChallengeViewController(challenge: challenge)
+                self.window?.rootViewController?.navigationController?.pushViewController(viewController, animated: true)
+            })
+            
+        }
+        
         return true
     }
     
@@ -109,11 +127,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        let userManager = Managers.User
+        let challengeManager = Managers.Challenge
+        // get the player Object
+        let playerID = userInfo["p"] as? String
+        
+        userManager.findPlayerWithID(playerID!, finished: { (player) -> () in
+            let challenge = challengeManager.createChallenge(player)
+            let viewController = ChallengeViewController(challenge: challenge)
+            self.window?.rootViewController?.navigationController?.pushViewController(viewController, animated: true)
+        })
+    }
+    
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         PFPush.handlePush(userInfo)
         if application.applicationState == UIApplicationState.Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
+        
     }
     
     ///////////////////////////////////////////////////////////
