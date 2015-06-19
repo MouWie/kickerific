@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChallengeViewController" customModule="Kickerific" customModuleProvider="target">
             <connections>
-                <outlet property="denyChallenge" destination="GcM-ov-cqg" id="k1g-Y9-xGg"/>
+                <outlet property="headerLabel" destination="HOV-Kf-QnO" id="0lZ-I5-SGX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,23 +30,31 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcM-ov-cqg">
-                    <rect key="frame" x="224" y="263" width="152" height="61"/>
+                    <rect key="frame" x="224" y="263" width="152" height="70"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="61" id="hsL-cV-Lrg"/>
+                        <constraint firstAttribute="height" constant="70" id="hsL-cV-Lrg"/>
                     </constraints>
                     <state key="normal" title="Deny">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="denyChallenge:" destination="-1" eventType="touchUpInside" id="rlD-KM-eBv"/>
+                        <action selector="denyChallenge:" destination="-1" eventType="touchUpInside" id="ZF5-7C-fCK"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOV-Kf-QnO">
+                    <rect key="frame" x="279" y="57" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="GcM-ov-cqg" firstAttribute="top" secondItem="cZr-tC-Bu7" secondAttribute="bottom" constant="64" id="76c-rH-Ka2"/>
                 <constraint firstItem="cZr-tC-Bu7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="125" id="CnT-0r-3Dy"/>
+                <constraint firstAttribute="centerX" secondItem="HOV-Kf-QnO" secondAttribute="centerX" id="XnY-eF-8Op"/>
+                <constraint firstItem="HOV-Kf-QnO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="57" id="Z0u-52-OTi"/>
                 <constraint firstItem="cZr-tC-Bu7" firstAttribute="leading" secondItem="GcM-ov-cqg" secondAttribute="leading" id="aY7-00-0Bz"/>
                 <constraint firstAttribute="centerX" secondItem="cZr-tC-Bu7" secondAttribute="centerX" id="g4I-yS-Lxk"/>
                 <constraint firstItem="cZr-tC-Bu7" firstAttribute="trailing" secondItem="GcM-ov-cqg" secondAttribute="trailing" id="xXJ-Gj-YiU"/>

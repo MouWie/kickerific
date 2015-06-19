@@ -9,11 +9,14 @@
 import UIKit
 
 class ChallengeViewController: UIViewController {
+    @IBOutlet weak var headerLabel: UILabel!
     
     var _challenge: Challenge?
+    var _challengeManager: ChallengeProtocol?
     
     init(challenge: Challenge) {
         _challenge = challenge
+        _challengeManager = Managers.Challenge
         super.init(nibName: "ChallengeViewController", bundle: nil)
     }
     
@@ -23,7 +26,8 @@ class ChallengeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        headerLabel.text = "Challenge received from\(_challenge?.challenger.name)"
         // Do any additional setup after loading the view.
     }
 
@@ -46,12 +50,20 @@ class ChallengeViewController: UIViewController {
     
     @IBAction func denyChallenge(sender: AnyObject) {
         
-        
+        _challengeManager?.deleteChallenge(_challenge!)
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            // notify challenger
+            _challengeManager?.denyChallenge(_challenge!)
+        })
     }
     
     
     @IBAction func acceptChallenge(sender: AnyObject) {
         
-        
+        _challengeManager?.acceptChallenge(_challenge!)
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            //start Match Making ...
+            _challengeManager?.acceptChallenge(_challenge!)
+        })
     }
 }

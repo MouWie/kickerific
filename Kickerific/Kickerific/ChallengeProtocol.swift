@@ -34,4 +34,21 @@ import Foundation
     */
     
     func createChallenge(player:Player) -> Challenge
+    
+    /**
+    *  Delete challenge locally from storage
+    */
+    
+    func deleteChallenge(challenge: Challenge)
+    
+    /**
+    *  accept challenge send push
+    */
+    func acceptChallenge(challenge:Challenge)
+    
+    /**
+    *  deny challenge send push
+    */
+    func denyChallenge(challenge:Challenge)
+    
 }

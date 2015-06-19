@@ -80,9 +80,30 @@ import Parse
             // Send push notification to query
             let push = PFPush()
             let data = [
-                "alert" : "Challenge accepted by \(userManager.getCurrentPlayer()!.name)! BRING IT ON!",
+                "alert" : "Challenge ACCEPTED by \(userManager.getCurrentPlayer()!.name)! BRING IT ON!",
                 "badge" : "Increment",
                 "c": challenge.objectId! as String
+            ]
+            push.setData(data)
+            push.setQuery(pushQuery) // Set our Installation query
+            push.sendPushInBackgroundWithBlock { (success, error) -> Void in
+                println("push send to challenger")
+            }
+        })
+    }
+    
+    func denyChallenge(challenge:Challenge) {
+        
+        let userManager = Managers.User
+        //retreive the corresponding user from Cloud
+        userManager.getUserWithID(challenge.challenger.userID, finished: { (user) -> () in
+            let pushQuery = PFInstallation.query()
+            pushQuery!.whereKey("user", equalTo: user)
+            // Send push notification to query
+            let push = PFPush()
+            let data = [
+                "alert" : "Challenge DENIED by \(userManager.getCurrentPlayer()!.name)! Maybe he is scared...",
+                "badge" : "Increment",
             ]
             push.setData(data)
             push.setQuery(pushQuery) // Set our Installation query
@@ -102,11 +123,11 @@ import Parse
         return challenge
     }
     
-    func deleteChallengesFromChallenger(challenge: Challenge) {
+    func deleteChallengesFromChallenger(player: Player) {
         
         let query = PFQuery(className:"Challenge")
         query.fromLocalDatastore()
-        query.whereKey("player", equalTo: challenge.challenger)
+        query.whereKey("player", equalTo: player)
         
         let array = query.findObjects()
         
@@ -114,11 +135,13 @@ import Parse
             
             let obj: Challenge = array![index] as! Challenge
             obj.unpin()
-            
+            UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber - 1
         }
     }
     
     func deleteChallenge(challenge: Challenge) {
+        
+        UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber - 1
         
         let challenge = Challenge(withoutDataWithObjectId: challenge.objectId)
         

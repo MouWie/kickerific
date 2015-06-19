@@ -28,6 +28,8 @@ class PlayerTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.navigationController?.navigationItem.hidesBackButton = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,8 +60,6 @@ class PlayerTableViewController: UITableViewController {
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.contentView.backgroundColor = UIColor.grayColor()//getRandomColor()
         cell.textLabel?.backgroundColor = UIColor.clearColor()
-        cell.contentView.layer.cornerRadius = 5;
-        cell.contentView.layer.masksToBounds = true;
         cell.imageView?.image = UIImage(named: "maxresdefault")
         let player = playerArray![indexPath.row] as Player
         let text = player.name
@@ -136,6 +136,7 @@ class PlayerTableViewController: UITableViewController {
 
         //cell.userInteractionEnabled = false
         cell.alpha = 0.8
+        cell.detailTextLabel?.text = "challenged"
         
     }
     
