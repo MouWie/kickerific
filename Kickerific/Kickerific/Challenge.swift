@@ -18,6 +18,7 @@ class Challenge : PFObject, PFSubclassing {
     // @NSManaged var players: Array<Player> later for more people
     @NSManaged var accepted: Bool
     @NSManaged var challenger: Player
+    @NSManaged var defender: Player
     
     override class func initialize() {
         struct Static {

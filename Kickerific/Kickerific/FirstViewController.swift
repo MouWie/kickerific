@@ -15,12 +15,26 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationController?.navigationItem.hidesBackButton = true
+        
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        if let parent = self.parentViewController as? UITabBarController {
+            
+            self.tabBarItem.badgeValue = nil
+            
+        }
+        
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
 }
 

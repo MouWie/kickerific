@@ -84,17 +84,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let challengeManager = Managers.Challenge
         challengeManager.initialize()
         
-        //User Notification 
+        //User Notification if app running
+        
         if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
-            let userManager = Managers.User
-            // get the player Object
-            let playerID = notificationPayload["p"] as? String
             
-            userManager.findPlayerWithID(playerID!, finished: { (player) -> () in
-                let challenge = challengeManager.createChallenge(player)
-                let viewController = ChallengeViewController(challenge: challenge)
-                self.window?.rootViewController?.navigationController?.pushViewController(viewController, animated: true)
-            })
+            handleNotification(notificationPayload)
             
         }
         
@@ -128,23 +122,97 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        let userManager = Managers.User
-        let challengeManager = Managers.Challenge
-        // get the player Object
-        let playerID = userInfo["p"] as? String
         
-        userManager.findPlayerWithID(playerID!, finished: { (player) -> () in
-            let challenge = challengeManager.createChallenge(player)
-            let viewController = ChallengeViewController(challenge: challenge)
-            let navController = self.window?.rootViewController as! UINavigationController
-            navController.visibleViewController.presentViewController(viewController, animated: true, completion: nil)
-        })
+        handleNotification(userInfo)
+        (UIBackgroundFetchResult.NoData)
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         PFPush.handlePush(userInfo)
         if application.applicationState == UIApplicationState.Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+        }
+        
+    }
+    
+    func handleNotification(userInfo: NSDictionary) {
+        
+        let userManager = Managers.User
+        let challengeManager = Managers.Challenge
+        let gameManager = Managers.Game
+        // get the player Object
+        
+        // notification comes in as challenge
+        if let player: AnyObject = userInfo["p"] {
+           
+            let playerID = userInfo["p"] as? String
+            
+            userManager.findPlayerWithID(playerID!, finished: { (player) -> () in
+                let challenge = challengeManager.createChallenge(player, defender: userManager.getCurrentPlayer()!)
+                let viewController = ChallengeViewController(challenge: challenge)
+                let navController = self.window?.rootViewController as! UINavigationController
+                navController.visibleViewController.presentViewController(viewController, animated: true, completion: nil)
+            })
+
+        } // notification comes in as answer
+        else {
+            
+            if let info: AnyObject = userInfo["i"] {
+                let player = userInfo["ip"] as! String
+                if info as! String == "accepted" {
+                    // challenge accepted
+                    userManager.findPlayerWithID(player, finished: { (object) -> () in
+                        let player = object
+                        gameManager.setupGame([player], players2: [userManager.getCurrentPlayer()!])
+                        let navController = self.window?.rootViewController as! UINavigationController
+                        
+                        let visibleViewController = navController.visibleViewController
+                        if(visibleViewController is UITabBarController) {
+                            
+                            challengeManager.deleteChallengesFromChallenger(player, finished: { (finished) -> () in
+                                let tabcontroller = navController.visibleViewController as! UITabBarController
+                                var tabArray = tabcontroller.tabBar.items as NSArray!
+                                var tabItem = tabArray.objectAtIndex(1) as! UITabBarItem
+                                tabItem.badgeValue = "New"
+                                
+                                let alert = UIAlertController(title: "New challenge", message: "\(player.name) accepted your challenge. Go to Matches and play.", preferredStyle: UIAlertControllerStyle.Alert)
+                                let cancelAction = UIAlertAction(title: "Will do", style: .Cancel) { (action) in
+                                    println(action)
+                                }
+                                alert.addAction(cancelAction)
+                                tabcontroller.presentViewController(alert, animated: true, completion: nil)
+                                
+                                NSNotificationCenter.defaultCenter().postNotificationName("notifciationArrived", object: nil)
+                            })
+                        }
+                        
+                    })
+                }
+                else {
+                    // challenge denied
+                    userManager.findPlayerWithID(player, finished: { (object) -> () in
+                        let player = object
+                        
+                        challengeManager.deleteChallengesFromChallenger(player, finished: { (finished) -> () in
+                            
+                            let navController = self.window?.rootViewController as! UINavigationController
+                            let visibleViewController = navController.visibleViewController
+                            let alert = UIAlertController(title: "Challenge denied", message: "\(player.name) is scared of you", preferredStyle: UIAlertControllerStyle.Alert)
+                            let cancelAction = UIAlertAction(title: "Pussy", style: .Cancel) { (action) in
+                                println(action)
+                            }
+                            alert.addAction(cancelAction)
+                            visibleViewController.presentViewController(alert, animated: true, completion: nil)
+                            
+                            NSNotificationCenter.defaultCenter().postNotificationName("notifciationArrived", object: nil)
+                        })
+                        
+                    })
+                    
+                }
+                
+            }
+            
         }
         
     }

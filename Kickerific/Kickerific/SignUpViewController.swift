@@ -34,6 +34,7 @@ class SignUpViewController: UIViewController {
         user.username = usernameTextField.text
         user.password = passwordTextField.text
         user.email = emailTextField.text
+        emailTextField.keyboardType = UIKeyboardType.EmailAddress
         // other fields can be set just like with PFObject
         user["customTitle"] = titleTextField.text
         

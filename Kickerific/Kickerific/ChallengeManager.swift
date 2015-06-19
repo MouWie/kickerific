@@ -16,7 +16,7 @@ import Parse
     func initialize() {
         
         challenges = getChallenges()
-        
+        UIApplication.sharedApplication().applicationIconBadgeNumber = challenges!.count
     }
     
     func broadcastChallenge() {
@@ -33,13 +33,24 @@ import Parse
         
     }
     
-    func getChallenges()->Array<Challenge>? {
+    func getChallenges() -> Array<Challenge>? {
         
         let query = PFQuery(className:"Challenge")
         query.fromLocalDatastore()
         challenges = query.findObjects() as? Array<Challenge>
         
         return challenges
+    }
+    
+    func getChallengedPlayers() -> Array<Player> {
+        
+        var arr:Array = [Player]()
+        
+        for var i = 0; i < challenges?.count; ++i {
+            let player = challenges![i].defender
+            arr.append(player)
+        }
+        return arr
     }
     
     
@@ -66,6 +77,7 @@ import Parse
             push.setQuery(pushQuery) // Set our Installation query
             push.sendPushInBackgroundWithBlock { (success, error) -> Void in
                 println("push send to \(player.name)")
+                self.createChallenge(userManager.getCurrentPlayer()!, defender: player)
             }
         })
     }
@@ -81,13 +93,17 @@ import Parse
             let push = PFPush()
             let data = [
                 "alert" : "Challenge ACCEPTED by \(userManager.getCurrentPlayer()!.name)! BRING IT ON!",
-                "badge" : "Increment",
-                "c": challenge.objectId! as String
+                "i" : "accepted",
+                "ip" : userManager.getCurrentPlayer()!.objectId!
             ]
             push.setData(data)
             push.setQuery(pushQuery) // Set our Installation query
             push.sendPushInBackgroundWithBlock { (success, error) -> Void in
-                println("push send to challenger")
+                println("ACCEPT CHALLENGE PUSH SEND")
+                UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber - 1
+                self.deleteChallengesFromChallenger(challenge.challenger, finished: { (finished) -> () in
+                    
+                })
             }
         })
     }
@@ -103,49 +119,55 @@ import Parse
             let push = PFPush()
             let data = [
                 "alert" : "Challenge DENIED by \(userManager.getCurrentPlayer()!.name)! Maybe he is scared...",
-                "badge" : "Increment",
+                "i" : "denied",
+                "ip" : userManager.getCurrentPlayer()!.objectId!
             ]
             push.setData(data)
             push.setQuery(pushQuery) // Set our Installation query
             push.sendPushInBackgroundWithBlock { (success, error) -> Void in
-                println("push send to challenger")
+                println("DENY CHALLENGE PUSH SEND")
+                UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber - 1
+                self.deleteChallengesFromChallenger(challenge.challenger, finished: { (finished) -> () in
+                    
+                })
             }
         })
     }
     
-    func createChallenge(player:Player) -> Challenge {
+    func createChallenge(challenger:Player, defender:Player) -> Challenge {
         
+        let userManager = Managers.User
         let challenge = Challenge()
-        challenge.challenger = player
+        challenge.challenger = challenger
+        challenge.defender = defender
         challenge.pin()
         challenges?.append(challenge)
         
         return challenge
     }
     
-    func deleteChallengesFromChallenger(player: Player) {
+    func deleteChallengesFromChallenger(player: Player, finished:(finished:Bool) -> ()) {
         
         let query = PFQuery(className:"Challenge")
         query.fromLocalDatastore()
-        query.whereKey("player", equalTo: player)
-        
-        let array = query.findObjects()
-        
-        for (var index = 0; index < array!.count; index++) {
+        query.whereKey("challenger", equalTo: player)
+        query.findObjectsInBackgroundWithBlock { (arr, error) -> Void in
             
-            let obj: Challenge = array![index] as! Challenge
-            obj.unpin()
-            UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber - 1
+            for (var index = 0; index < arr!.count; index++) {
+                let obj: Challenge = arr![index] as! Challenge
+                println("Challenge from Challenger removed: \(self.challenges![index].challenger)")
+                self.challenges?.removeAtIndex(index)
+                obj.unpin()
+            }
+            
+            self.challenges = self.getChallenges()
+            finished(finished: true)
         }
+
     }
     
     func deleteChallenge(challenge: Challenge) {
-        
-        UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber - 1
-        
         let challenge = Challenge(withoutDataWithObjectId: challenge.objectId)
-        
         challenge.unpin()
     }
-    
 }

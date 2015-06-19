@@ -27,7 +27,7 @@ class ChallengeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        headerLabel.text = "Challenge received from\(_challenge?.challenger.name)"
+        headerLabel.text = "Challenge received from\(_challenge!.challenger.name)"
         // Do any additional setup after loading the view.
     }
 

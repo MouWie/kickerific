@@ -24,6 +24,7 @@ class TabBarViewController: UITabBarController {
         welcomeLabel.text = "Hello \(currentUser.username!)! Ready to play?"
         
         self.navigationController?.navigationItem.hidesBackButton = true
+        self.navigationItem.hidesBackButton = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,7 +32,7 @@ class TabBarViewController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
 

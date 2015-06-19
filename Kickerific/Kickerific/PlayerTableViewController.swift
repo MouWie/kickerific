@@ -14,6 +14,7 @@ class PlayerTableViewController: UITableViewController {
     var userManager: UserManagerProtocol?
     var challengeManager: ChallengeProtocol?
     var playerArray: Array<Player>?
+    var challengedPlayerArray: Array<Player>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,16 +23,18 @@ class PlayerTableViewController: UITableViewController {
         self.challengeManager = ServiceLocator.sharedInstance.get(ChallengeProtocol) as! ChallengeManager
         
         playerArray = userManager?.getPlayerList()
-        
+        challengedPlayerArray = challengeManager?.getChallengedPlayers()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notificationArrived:", name: "notifciationArrived", object: nil)
+        
         self.navigationController?.navigationItem.hidesBackButton = true
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,6 +59,7 @@ class PlayerTableViewController: UITableViewController {
         //let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
          let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         
+        challengedPlayerArray = challengeManager?.getChallengedPlayers()
         
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.contentView.backgroundColor = UIColor.grayColor()//getRandomColor()
@@ -65,12 +69,23 @@ class PlayerTableViewController: UITableViewController {
         let text = player.name
         cell.textLabel?.text = text
         if (text == PFUser.currentUser()?.username) {
+            // if current user
             cell.userInteractionEnabled = false
             cell.contentView.backgroundColor = UIColor.darkGrayColor()
             cell.textLabel?.textColor = UIColor.blackColor()
             cell.detailTextLabel?.text = "You"
             cell.detailTextLabel?.textColor = UIColor.whiteColor()
             cell.imageView?.image = UIImage(named: "funnycat")
+        }
+        else {
+            // check if there are already open challenges
+            if let players = challengedPlayerArray {
+                for player in players {
+                    if cell.textLabel?.text == player.name {
+                        cellDeactivated(cell)
+                    }
+                }
+            }
         }
         
         
@@ -84,7 +99,7 @@ class PlayerTableViewController: UITableViewController {
         challengeManager?.challengePlayer(playerToChallenge)
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cellActivated(cell!)
+        cellDeactivated(cell!)
     }
 
     /*
@@ -132,17 +147,20 @@ class PlayerTableViewController: UITableViewController {
     }
     */
     
-    func cellActivated(cell:UITableViewCell) {
+    func cellDeactivated(cell:UITableViewCell) {
 
         //cell.userInteractionEnabled = false
         cell.alpha = 0.8
         cell.detailTextLabel?.text = "challenged"
+        //cell.userInteractionEnabled = false
         
     }
     
-    func cellReActivated(userInfo: NSDictionary) {
+    func cellReActivated(cell:UITableViewCell, text:String) {
         
-        tableView.reloadData()
+        cell.alpha = 1
+        cell.detailTextLabel?.text = text
+        cell.userInteractionEnabled = true
     }
     
     func getRandomColor() -> UIColor{
@@ -159,6 +177,12 @@ class PlayerTableViewController: UITableViewController {
 
     @IBAction func challengeBroadcast(sender: AnyObject) {
         challengeManager?.broadcastChallenge()
+    }
+    
+    func notificationArrived(notification: NSNotification) {
+        
+        self.tableView.reloadData()
+        
     }
 
 }

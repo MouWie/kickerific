@@ -33,7 +33,7 @@ import Foundation
     *  Creates a new challenge with a player
     */
     
-    func createChallenge(player:Player) -> Challenge
+    func createChallenge(challenger:Player, defender:Player) -> Challenge
     
     /**
     *  Delete challenge locally from storage
@@ -50,5 +50,16 @@ import Foundation
     *  deny challenge send push
     */
     func denyChallenge(challenge:Challenge)
+    
+    /**
+    *  Delete challenges from specific player
+    */
+    func deleteChallengesFromChallenger(player: Player, finished:(finished:Bool) -> ())
+    
+    /**
+    *  list of currently challenged players
+    */
+    
+    func getChallengedPlayers() -> Array<Player>
     
 }

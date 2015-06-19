@@ -16,8 +16,8 @@ class UserManagingTests: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        Bootstrapper.initializeServices()
-        Bootstrapper.initializeParseFunctions()
+        //Bootstrapper.initializeServices()
+        //Bootstrapper.initializeParseFunctions()
     }
     
     override func tearDown() {

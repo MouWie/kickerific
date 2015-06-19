@@ -103,6 +103,8 @@ import Parse
         let installation = PFInstallation.currentInstallation()
         installation["user"] = NSNull()
         installation.save()
+        
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
     }
     
     func getCurrentUser() -> AnyObject? {
