@@ -11,7 +11,25 @@ import Foundation
 
 @objc protocol GameManagerProtocol {
     
-    func setupGame(players1: Array<Player>, players2: Array<Player>)
+    /**
+    *  Initialize
+    */
+    func initialize()
     
     
+    /**
+    *  Creates a game locally
+    */
+    func createLocalGame(team1: Team, team2: Team)
+    
+    /**
+    *  Creats a game remotely
+    */
+    
+    func createRemoteGame(team1: Team, team2: Team)
+    
+    /**
+    *  Create a team from array
+    */
+    func createTeamFromArray(arr:Array<Player>) -> Team
 }

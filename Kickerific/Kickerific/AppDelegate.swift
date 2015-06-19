@@ -163,7 +163,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     // challenge accepted
                     userManager.findPlayerWithID(player, finished: { (object) -> () in
                         let player = object
-                        gameManager.setupGame([player], players2: [userManager.getCurrentPlayer()!])
                         let navController = self.window?.rootViewController as! UINavigationController
                         
                         let visibleViewController = navController.visibleViewController
@@ -175,7 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 var tabItem = tabArray.objectAtIndex(1) as! UITabBarItem
                                 tabItem.badgeValue = "New"
                                 
-                                let alert = UIAlertController(title: "New challenge", message: "\(player.name) accepted your challenge. Go to Matches and play.", preferredStyle: UIAlertControllerStyle.Alert)
+                                let alert = UIAlertController(title: "New Matchup! ", message: "\(player.name) accepted your challenge. Good luck!", preferredStyle: UIAlertControllerStyle.Alert)
                                 let cancelAction = UIAlertAction(title: "Will do", style: .Cancel) { (action) in
                                     println(action)
                                 }
@@ -197,7 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
                             let navController = self.window?.rootViewController as! UINavigationController
                             let visibleViewController = navController.visibleViewController
-                            let alert = UIAlertController(title: "Challenge denied", message: "\(player.name) is scared of you", preferredStyle: UIAlertControllerStyle.Alert)
+                            let alert = UIAlertController(title: "Challenge denied", message: "\(player.name) is scared of you!", preferredStyle: UIAlertControllerStyle.Alert)
                             let cancelAction = UIAlertAction(title: "Pussy", style: .Cancel) { (action) in
                                 println(action)
                             }
