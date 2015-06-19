@@ -16,7 +16,9 @@ import Parse
     func initialize() {
         
         challenges = getChallenges()
+        println(challenges?.count)
         UIApplication.sharedApplication().applicationIconBadgeNumber = challenges!.count
+        //self.dumpChallenges()
     }
     
     func broadcastChallenge() {
@@ -153,10 +155,10 @@ import Parse
         query.whereKey("challenger", equalTo: player)
         query.findObjectsInBackgroundWithBlock { (arr, error) -> Void in
             
+            println(arr!.count)
             for (var index = 0; index < arr!.count; index++) {
                 let obj: Challenge = arr![index] as! Challenge
                 println("Challenge from Challenger removed: \(self.challenges![index].challenger)")
-                self.challenges?.removeAtIndex(index)
                 obj.unpin()
             }
             
@@ -164,6 +166,23 @@ import Parse
             finished(finished: true)
         }
 
+    }
+    
+    func dumpChallenges() {
+        
+        let query = PFQuery(className:"Challenge")
+        query.fromLocalDatastore()
+        
+        let array = query.findObjects()
+        println(array)
+        println(array?.count)
+        
+        for (var index = 0; index < array!.count; index++) {
+            let obj: Challenge = array![index] as! Challenge
+            obj.unpin()
+        }
+        self.challenges?.removeAll(keepCapacity: true)
+        
     }
     
     func deleteChallenge(challenge: Challenge) {

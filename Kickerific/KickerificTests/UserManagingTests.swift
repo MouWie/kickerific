@@ -28,7 +28,7 @@ class UserManagingTests: XCTestCase {
     func test_userAuthenticationWorks_works() {
         
         //setup
-        let user = "mario"
+        let user = "david"
         let pass = "123"
         let userManager: Optional<AnyObject> = ServiceLocator.sharedInstance.get(UserManagerProtocol)
         

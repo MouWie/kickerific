@@ -169,7 +169,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         let visibleViewController = navController.visibleViewController
                         if(visibleViewController is UITabBarController) {
                             
-                            challengeManager.deleteChallengesFromChallenger(player, finished: { (finished) -> () in
+                            challengeManager.deleteChallengesFromChallenger(userManager.getCurrentPlayer()!, finished: { (finished) -> () in
                                 let tabcontroller = navController.visibleViewController as! UITabBarController
                                 var tabArray = tabcontroller.tabBar.items as NSArray!
                                 var tabItem = tabArray.objectAtIndex(1) as! UITabBarItem
@@ -193,7 +193,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     userManager.findPlayerWithID(player, finished: { (object) -> () in
                         let player = object
                         
-                        challengeManager.deleteChallengesFromChallenger(player, finished: { (finished) -> () in
+                        challengeManager.deleteChallengesFromChallenger(userManager.getCurrentPlayer()!, finished: { (finished) -> () in
                             
                             let navController = self.window?.rootViewController as! UINavigationController
                             let visibleViewController = navController.visibleViewController
