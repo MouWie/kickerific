@@ -54,8 +54,6 @@
 		638338C51B301D12003199CD /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338C31B301D12003199CD /* UserManager.swift */; };
 		638338C71B301D2B003199CD /* UserManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338C61B301D2B003199CD /* UserManagerProtocol.swift */; };
 		638338C81B301D2B003199CD /* UserManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338C61B301D2B003199CD /* UserManagerProtocol.swift */; };
-		638338CC1B3022B1003199CD /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 638338CB1B3022B1003199CD /* Test.m */; };
-		638338CD1B3022B1003199CD /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 638338CB1B3022B1003199CD /* Test.m */; };
 		638338CF1B30281B003199CD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338CE1B30281B003199CD /* LoginViewController.swift */; };
 		638338D21B3028A9003199CD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338D11B3028A9003199CD /* SignUpViewController.swift */; };
 		638338D31B3028A9003199CD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338D11B3028A9003199CD /* SignUpViewController.swift */; };
@@ -124,7 +122,6 @@
 		638338C61B301D2B003199CD /* UserManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManagerProtocol.swift; sourceTree = "<group>"; };
 		638338C91B3022B0003199CD /* Kickerific-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kickerific-Bridging-Header.h"; sourceTree = "<group>"; };
 		638338CA1B3022B0003199CD /* KickerificTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KickerificTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		638338CB1B3022B1003199CD /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		638338CE1B30281B003199CD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		638338D11B3028A9003199CD /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		638338DB1B30327A003199CD /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -281,7 +278,6 @@
 		638338BF1B3013C8003199CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				638338CB1B3022B1003199CD /* Test.m */,
 				638338DF1B3060D3003199CD /* Match.swift */,
 				638338C01B3013E1003199CD /* Player.swift */,
 				ACD190F61B30D5AF00FC794C /* Team.swift */,
@@ -407,7 +403,6 @@
 			files = (
 				638338CF1B30281B003199CD /* LoginViewController.swift in Sources */,
 				638338C41B301D12003199CD /* UserManager.swift in Sources */,
-				638338CC1B3022B1003199CD /* Test.m in Sources */,
 				638338E01B3060D3003199CD /* Match.swift in Sources */,
 				63693DC31B2F0EF800211995 /* ServiceLocator.swift in Sources */,
 				638338DC1B30327A003199CD /* TabBarViewController.swift in Sources */,
@@ -444,7 +439,6 @@
 				6365B3001B3303A400F265F9 /* ChallengeViewController.swift in Sources */,
 				638338BC1B301156003199CD /* GameManagerProtocol.swift in Sources */,
 				638338BE1B3012CB003199CD /* GameSetupTest.swift in Sources */,
-				638338CD1B3022B1003199CD /* Test.m in Sources */,
 				638338E31B307081003199CD /* UserManagingTests.swift in Sources */,
 				635CB57C1B31731100B4255F /* StorageManagerProtocol.swift in Sources */,
 				638338D31B3028A9003199CD /* SignUpViewController.swift in Sources */,

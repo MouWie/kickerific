@@ -171,7 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             challengeManager.deleteChallengesFromChallenger(userManager.getCurrentPlayer()!, finished: { (finished) -> () in
                                 let tabcontroller = navController.visibleViewController as! UITabBarController
                                 var tabArray = tabcontroller.tabBar.items as NSArray!
-                                var tabItem = tabArray.objectAtIndex(1) as! UITabBarItem
+                                var tabItem = tabArray.objectAtIndex(0) as! UITabBarItem
                                 tabItem.badgeValue = "New"
                                 
                                 let alert = UIAlertController(title: "New Matchup! ", message: "\(player.name) accepted your challenge. Good luck!", preferredStyle: UIAlertControllerStyle.Alert)

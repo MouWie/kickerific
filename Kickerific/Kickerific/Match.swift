@@ -17,7 +17,7 @@ class Match : PFObject, PFSubclassing {
     @NSManaged var team2Score: NSNumber
     @NSManaged var Team1: Team
     @NSManaged var Team2: Team
-    @NSManaged var started: Bool
+    @NSManaged var finished: Bool
     
     override class func initialize() {
         struct Static {

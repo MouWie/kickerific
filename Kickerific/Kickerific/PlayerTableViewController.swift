@@ -35,6 +35,14 @@ class PlayerTableViewController: UITableViewController {
         self.navigationController?.navigationItem.hidesBackButton = true
     }
     
+    override func viewDidAppear(animated: Bool) {
+        if let parent = self.parentViewController as? UITabBarController {
+            
+            self.tabBarItem.badgeValue = "\(challengedPlayerArray?.count)"
+            
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

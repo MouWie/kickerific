@@ -60,7 +60,6 @@ class ChallengeViewController: UIViewController {
     
     @IBAction func acceptChallenge(sender: AnyObject) {
         
-        _challengeManager?.acceptChallenge(_challenge!)
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             //start Match Making ...
             _challengeManager?.acceptChallenge(_challenge!)

@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -17,6 +17,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var titleTextField: UITextField!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,8 +76,21 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func dismissVC(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
-        })
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    //MARK: - TextfieldDelegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        
+        
+        
+        return true
     }
 }

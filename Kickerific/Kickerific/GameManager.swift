@@ -19,20 +19,34 @@ class GameManager: NSObject, GameManagerProtocol {
         matchList = array
     }
     
+    
     func createLocalGame(team1: Team, team2: Team) {
-        
-        
+       
         
     }
     
     func createRemoteGame(team1: Team, team2: Team) {
         
+        let match = Match(className: "Match")
+        match.Team1 = team1
+        match.Team2 = team2
+        match.team1Score = 0
+        match.team2Score = 0
+        match.finished = false
+        
+        match.saveInBackgroundWithBlock { (success, error) -> Void in
+            
+            matchList?.append(match)
+            
+        }
         
     }
     
     func getMatchListFromRemote() {
         
-        
+        var query = PFQuery(className: "Match")
+        let array: Array<Match> = query.findObjects() as! Array<Match>
+        matchList = array
         
     }
     
