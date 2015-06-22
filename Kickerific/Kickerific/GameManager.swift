@@ -36,7 +36,7 @@ class GameManager: NSObject, GameManagerProtocol {
         
         match.saveInBackgroundWithBlock { (success, error) -> Void in
             
-            matchList?.append(match)
+            self.getMatchListFromRemote()
             
         }
         
