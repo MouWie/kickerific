@@ -38,7 +38,7 @@ class PlayerTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         if let parent = self.parentViewController as? UITabBarController {
             
-            self.tabBarItem.badgeValue = "\(challengedPlayerArray?.count)"
+            self.tabBarItem.badgeValue = "\(challengedPlayerArray!.count)"
             
         }
     }
