@@ -28,6 +28,10 @@ class MatchViewController: UITableViewController, UIPickerViewDataSource, UIPick
         self.navigationController?.navigationItem.hidesBackButton = true
     }
     
+    override func viewDidAppear(animated: Bool) {
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -130,5 +134,9 @@ class MatchViewController: UITableViewController, UIPickerViewDataSource, UIPick
         let players = userManager.getPlayerList()
         
         return players[row].name
+    }
+    
+    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 75
     }
 }
