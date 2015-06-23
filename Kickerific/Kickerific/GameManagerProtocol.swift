@@ -17,13 +17,24 @@ import Foundation
     func initialize()
     
     /**
+    *  get list of matches
+    */
+    func getMatchList() -> Array<Match>
+    
+    /**
+    *  refrseshes matchList
+    */
+    func refreshMatches()
+    
+    /**
     *  Creates game
     */
     
-    func createGame(finished:(Bool) -> ())
+    func createGame(team1: Team, team2: Team, finished:(Bool) -> ())
     
     /**
     *  Create a team from array
     */
     func createTeamFromArray(arr:Array<Player>) -> Team
+    
 }

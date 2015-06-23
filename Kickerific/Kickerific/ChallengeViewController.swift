@@ -61,8 +61,27 @@ class ChallengeViewController: UIViewController {
     @IBAction func acceptChallenge(sender: AnyObject) {
         
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            //start Match Making ...
-            _challengeManager?.acceptChallenge(_challenge!)
+            //notify challenger
+            self._challengeManager?.acceptChallenge(self._challenge!)
+            
+            //start match making 
+            
+            let gameManager = Managers.Game
+            let userManager = Managers.User
+            // Create the game
+            var team1Array: [Player] = [userManager.getCurrentPlayer()!]
+            var team2Array: [Player] = [self._challenge!.challenger]
+            
+            let team1 = gameManager.createTeamFromArray(team1Array)
+            let team2 = gameManager.createTeamFromArray(team2Array)
+            
+            gameManager.createGame(team1, team2: team2, finished: { (success) -> () in
+                if(success) {
+                    gameManager.refreshMatches()
+                    NSNotificationCenter.defaultCenter().postNotificationName("gameUpdate", object: nil)
+                }
+            })
+            
         })
     }
 }

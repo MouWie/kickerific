@@ -30,7 +30,7 @@ class PlayerTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notificationArrived:", name: "notifciationArrived", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notificationArrived:", name: "challengeUpdate", object: nil)
         
         self.navigationController?.navigationItem.hidesBackButton = true
     }
@@ -108,6 +108,10 @@ class PlayerTableViewController: UITableViewController {
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cellDeactivated(cell!)
+        
+        let number = self.tabBarItem.badgeValue?.toInt()
+        let finalnumber = number! + 1
+        self.tabBarItem.badgeValue = "\(finalnumber)"
     }
 
     /*
@@ -190,7 +194,7 @@ class PlayerTableViewController: UITableViewController {
     func notificationArrived(notification: NSNotification) {
         
         self.tableView.reloadData()
-        
+        self.tabBarItem.badgeValue = "\(challengeManager!.getChallengedPlayers().count)"
     }
 
 }

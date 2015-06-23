@@ -174,19 +174,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
                             // delete the challenges and create match
                             challengeManager.deleteChallengesFromChallenger(userManager.getCurrentPlayer()!, finished: { (finished) -> () in
-                                let tabcontroller = navController.visibleViewController as! UITabBarController
-                                var tabArray = tabcontroller.tabBar.items as NSArray!
-                                var tabItem = tabArray.objectAtIndex(1) as! UITabBarItem
-                                tabItem.badgeValue = "New"
-                                
                                 let alert = UIAlertController(title: "New Matchup! ", message: "\(player.name) accepted your challenge. Good luck!", preferredStyle: UIAlertControllerStyle.Alert)
                                 let cancelAction = UIAlertAction(title: "Will do", style: .Cancel) { (action) in
                                     println(action)
                                 }
                                 alert.addAction(cancelAction)
+                                let tabcontroller = navController.visibleViewController as! UITabBarController
                                 tabcontroller.presentViewController(alert, animated: true, completion: nil)
+                                var tabArray = tabcontroller.tabBar.items as NSArray!
+                                var tabItem = tabArray.objectAtIndex(1) as! UITabBarItem
+                                tabItem.badgeValue = "New"
                                 
-                                NSNotificationCenter.defaultCenter().postNotificationName("notifciationArrived", object: nil)
+                                NSNotificationCenter.defaultCenter().postNotificationName("gameUpdate", object: nil)
+                                NSNotificationCenter.defaultCenter().postNotificationName("challengeUpdate", object: nil)
                             })
                         }
                         
@@ -208,7 +208,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             alert.addAction(cancelAction)
                             visibleViewController.presentViewController(alert, animated: true, completion: nil)
                             
-                            NSNotificationCenter.defaultCenter().postNotificationName("notifciationArrived", object: nil)
+                            NSNotificationCenter.defaultCenter().postNotificationName("challengeUpdate", object: nil)
                         })
                         
                     })
