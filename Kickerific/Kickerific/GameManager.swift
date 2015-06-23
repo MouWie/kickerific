@@ -172,8 +172,8 @@ class GameManager: NSObject, GameManagerProtocol {
             if(count == 2) {
                 team.Player1 = arr[0]
                 team.Player2 = arr[1]
-                team.teamName = "\(team.Player1.name)"+"/"+"\(team.Player1.name)"
             }
+            team.teamName = "\(team.Player1.name)"+"/"+"\(team.Player1.name)"
         }
         
         return team

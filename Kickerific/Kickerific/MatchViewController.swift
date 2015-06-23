@@ -8,9 +8,10 @@
 
 import UIKit
 
-class MatchViewController: UITableViewController {
+class MatchViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     let gameManager = Managers.Game
+    let userManager = Managers.User
     var matchList: Array<Match>?
     
     override func viewDidLoad() {
@@ -26,7 +27,7 @@ class MatchViewController: UITableViewController {
         
         self.navigationController?.navigationItem.hidesBackButton = true
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -49,12 +50,20 @@ class MatchViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("matchCell", forIndexPath: indexPath) as! MatchTableViewCell
-
         
-
+        let currentMatch = matchList![indexPath.row] as Match
+        
+        /*
+        let team: Team = currentMatch.Team1.fetchIfNeeded() as! Team
+        
+        cell.teamname1?.text = team.teamName
+        
+        let team2: Team = currentMatch.Team2.fetchIfNeeded() as! Team
+        
+        cell.teamname2?.text = team2.teamName
+        */
         return cell
     }
-    
 
     /*
     // Override to support conditional editing of the table view.
@@ -106,5 +115,20 @@ class MatchViewController: UITableViewController {
         gameManager.refreshMatches()
         self.tableView.reloadData()
         
+    }
+    
+    //  MARK: - Picker 
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return userManager.getPlayerList().count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        let players = userManager.getPlayerList()
+        
+        return players[row].name
     }
 }

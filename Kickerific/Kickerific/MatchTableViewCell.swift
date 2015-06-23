@@ -23,9 +23,7 @@ class MatchTableViewCell: UITableViewCell {
     
     @IBOutlet var teamname1: UILabel?
     @IBOutlet var teamname2: UILabel?
-    
-    var match: Match?
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,12 +34,6 @@ class MatchTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    func initializeWithMatch(match:Match) {
-    
-        
-    }
-    
     
 
 }
