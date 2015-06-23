@@ -27,7 +27,7 @@ class GameManager: NSObject, GameManagerProtocol {
     
     func createRemoteGame(team1: Team, team2: Team) {
         
-        let match = Match(className: "Match")
+        let match = Match()
         match.Team1 = team1
         match.Team2 = team2
         match.team1Score = 0

@@ -160,7 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let info: AnyObject = userInfo["i"] {
                 let player = userInfo["ip"] as! String
                 if info as! String == "accepted" {
-                    // challenge accepted
+                    // challenge accepted -> find opponent player in player list
                     userManager.findPlayerWithID(player, finished: { (object) -> () in
                         let player = object
                         let navController = self.window?.rootViewController as! UINavigationController
@@ -168,10 +168,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         let visibleViewController = navController.visibleViewController
                         if(visibleViewController is UITabBarController) {
                             
+                            // delete the challenges and create match
                             challengeManager.deleteChallengesFromChallenger(userManager.getCurrentPlayer()!, finished: { (finished) -> () in
                                 let tabcontroller = navController.visibleViewController as! UITabBarController
                                 var tabArray = tabcontroller.tabBar.items as NSArray!
-                                var tabItem = tabArray.objectAtIndex(0) as! UITabBarItem
+                                var tabItem = tabArray.objectAtIndex(1) as! UITabBarItem
                                 tabItem.badgeValue = "New"
                                 
                                 let alert = UIAlertController(title: "New Matchup! ", message: "\(player.name) accepted your challenge. Good luck!", preferredStyle: UIAlertControllerStyle.Alert)
