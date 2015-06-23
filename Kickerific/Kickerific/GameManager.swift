@@ -14,25 +14,30 @@ class GameManager: NSObject, GameManagerProtocol {
     
     func initialize() {
         
-        var query = PFQuery(className: "Match")
-        let array: Array<Match> = query.findObjects() as! Array<Match>
-        matchList = array
+        matchList = getMatchListFromRemote()
     }
     
     
     func createLocalGame(team1: Team, team2: Team) {
        
-        
-    }
-    
-    func createRemoteGame(team1: Team, team2: Team) {
-        
         let match = Match(className: "Match")
         match.Team1 = team1
         match.Team2 = team2
         match.team1Score = 0
         match.team2Score = 0
         match.finished = false
+        
+        match.pin()
+        
+    }
+    
+    func saveRemoteTeam(team: Team) {
+        
+        team.save()
+        
+    }
+    
+    func saveRemoteGame(match: Match) {
         
         match.saveInBackgroundWithBlock { (success, error) -> Void in
             
@@ -42,23 +47,36 @@ class GameManager: NSObject, GameManagerProtocol {
         
     }
     
-    func getMatchListFromRemote() {
+    func createGame(finished: (Bool) -> ()) {
         
-        var query = PFQuery(className: "Match")
-        let array: Array<Match> = query.findObjects() as! Array<Match>
-        matchList = array
+        
         
     }
     
-    func getLocalMatchList() {
+    func getMatchListFromRemote() -> Array<Match> {
+        
+        var query = PFQuery(className: "Match")
+        let array: Array<Match> = query.findObjects() as! Array<Match>
         
         
+        return array
+        
+    }
+    
+    func getLocalMatchList() -> Array<Match> {
+        
+        var query = PFQuery(className: "Match")
+        query.fromLocalDatastore()
+        let array: Array<Match> = query.findObjects() as! Array<Match>
+        
+        return array
         
     }
     
     func createTeamFromArray(arr:Array<Player>) -> Team{
         
         let team = Team()
+        team.teamName = "Default Team Name"
         
         let count = arr.count
         

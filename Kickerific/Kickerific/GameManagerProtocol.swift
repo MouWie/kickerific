@@ -16,17 +16,11 @@ import Foundation
     */
     func initialize()
     
-    
     /**
-    *  Creates a game locally
-    */
-    func createLocalGame(team1: Team, team2: Team)
-    
-    /**
-    *  Creats a game remotely
+    *  Creates game
     */
     
-    func createRemoteGame(team1: Team, team2: Team)
+    func createGame(finished:(Bool) -> ())
     
     /**
     *  Create a team from array

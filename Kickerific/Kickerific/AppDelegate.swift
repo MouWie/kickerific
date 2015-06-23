@@ -84,6 +84,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let challengeManager = Managers.Challenge
         challengeManager.initialize()
         
+        //Initialize Game Manager, get already stored matches
+        let gameManager = Managers.Game
+        gameManager.initialize()
+        
         //User Notification if app running
         
         if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
