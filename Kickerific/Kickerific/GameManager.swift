@@ -35,7 +35,22 @@ class GameManager: NSObject, GameManagerProtocol {
         return match
     }
     
+    func getTeamForPlayers(player1:Player, player2: Player) ->Team? {
+        
+        var query = PFQuery(className: "Team")
+        query.whereKey("Player1", equalTo: player1)
+        query.whereKey("Player2", equalTo: player2)
+        
+        if let object = query.getFirstObject() as? Team {
+            return object
+        }
+        else {
+            return nil
+        }
+    }
+    
     func saveRemoteTeam(team: Team) -> Team? {
+        
         let saved = team.save()
         
         if(saved) {
@@ -49,22 +64,44 @@ class GameManager: NSObject, GameManagerProtocol {
     func saveRemoteGame(match: Match, finished: (Bool) -> ()) {
         
         match.saveInBackgroundWithBlock { (success, error) -> Void in
-            
             match.pin()
-            finished(true)
+            if(success) {
+                finished(true)
+            }
+            else {
+                finished(false)
+            }
         }
         
     }
     
     func createGame(team1: Team, team2: Team, finished:(Bool) -> ()) {
+
+        let p_team1: Team?
+        if let savedteam1 = getTeamForPlayers(team1.Player1, player2: team1.Player2) {
+            p_team1 = savedteam1
+        }
+        else {
+            p_team1 = saveRemoteTeam(team1)
+        }
         
-        let savedteam1 = saveRemoteTeam(team1)
-        let savedteam2 = saveRemoteTeam(team2)
+        let p_team2: Team?
+        if let savedteam2 = getTeamForPlayers(team2.Player1, player2: team2.Player2) {
+            p_team2 = savedteam2
+        }
+        else {
+            p_team2 = saveRemoteTeam(team2)
+        }
         
-        let match = createLocalGame(savedteam1!, team2: savedteam2!)
+        let match = createLocalGame(p_team1!, team2: p_team2!)
         saveRemoteGame(match, finished: { (success) -> () in
             self.matchList = self.getMatchListFromRemote()
-            finished(true)
+            if(success) {
+                finished(true)
+            }
+            else {
+                finished(false)
+            }
         })
     }
     
@@ -79,6 +116,7 @@ class GameManager: NSObject, GameManagerProtocol {
     func getMatchListFromRemote() -> Array<Match> {
         
         var query = PFQuery(className: "Match")
+        query.whereKey("finished", equalTo: NSNumber(bool: false))
         let array: Array<Match> = query.findObjects() as! Array<Match>
         
         return array
@@ -108,7 +146,7 @@ class GameManager: NSObject, GameManagerProtocol {
         
         var query = PFQuery(className: "Team")
         query.whereKey("Player1", equalTo: player1)
-        query.whereKey("Player1", equalTo: player2)
+        query.whereKey("Player2", equalTo: player2)
         let array: Array<Team> = query.findObjects() as! Array<Team>
         
         if(array.count > 0) {
