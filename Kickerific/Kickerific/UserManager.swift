@@ -13,6 +13,7 @@ import Parse
     
     var _currentPlayer: Player?
     var _currentUser: PFUser?
+    var _playerList: Array<Player>?
     
     func initialize(finished: (Bool) -> ()) {
         _currentUser = getCurrentUser() as? PFUser
@@ -158,10 +159,17 @@ import Parse
     }
     
     func getPlayerList() -> Array<Player> {
-        var query = PFQuery(className: "Player")
-        query.orderByAscending("name")
-        let array: Array<Player> = query.findObjects() as! Array<Player>
-        return array
+        if(_playerList != nil) {
+            return _playerList!
+        }
+        else{
+            var query = PFQuery(className: "Player")
+            query.orderByAscending("name")
+            _playerList = query.findObjects() as? Array<Player>
+            return _playerList!
+        }
+        
+
         
     }
     
