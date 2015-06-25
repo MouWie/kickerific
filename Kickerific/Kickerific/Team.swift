@@ -12,8 +12,8 @@ import Parse
 
 class Team: PFObject, PFSubclassing {
 
-    @NSManaged var Player1: Player
-    @NSManaged var Player2: Player
+    @NSManaged var Player1: Player?
+    @NSManaged var Player2: Player?
     @NSManaged var teamName: String
     
     override class func initialize() {

@@ -8,28 +8,31 @@
 
 import UIKit
 
-class MatchViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class MatchViewController: UITableViewController{
     
     let gameManager = Managers.Game
     let userManager = Managers.User
     var matchList: Array<Match>?
+    var selectedMatch: Match?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         matchList = gameManager.getMatchList()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notificationArrived:", name: "challengeUpdate", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notificationArrived:", name: "matchUpdate", object: nil)
         
         self.navigationController?.navigationItem.hidesBackButton = true
     }
     
     override func viewDidAppear(animated: Bool) {
-        
+        if let parent = self.parentViewController as? UITabBarController {
+            
+            self.tabBarItem.badgeValue = "\(matchList!.count)"
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,10 +57,10 @@ class MatchViewController: UITableViewController, UIPickerViewDataSource, UIPick
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("matchCell", forIndexPath: indexPath) as! MatchTableViewCell
-        
+        cell.tag = indexPath.row
         let currentMatch = matchList![indexPath.row] as Match
         
-        /*
+        
         let team: Team = currentMatch.Team1.fetchIfNeeded() as! Team
         
         cell.teamname1?.text = team.teamName
@@ -65,8 +68,17 @@ class MatchViewController: UITableViewController, UIPickerViewDataSource, UIPick
         let team2: Team = currentMatch.Team2.fetchIfNeeded() as! Team
         
         cell.teamname2?.text = team2.teamName
-        */
+
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedMatch = matchList![indexPath.row]
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let editMatchController: EditMatchViewController = storyboard.instantiateViewControllerWithIdentifier("EditMatchViewController") as! EditMatchViewController
+        editMatchController.match = selectedMatch
+        self.presentViewController(editMatchController, animated: true, completion: nil)
     }
 
     /*
@@ -104,13 +116,19 @@ class MatchViewController: UITableViewController, UIPickerViewDataSource, UIPick
     }
     */
 
-    /*
+    
     // MARK: - Navigation
-
+    
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        
+        if(segue.identifier == "EditMatchSegue") {
+            let destController = segue.destinationViewController as! EditMatchViewController
+            destController.match = selectedMatch
+        }
     }
     */
     
@@ -121,22 +139,5 @@ class MatchViewController: UITableViewController, UIPickerViewDataSource, UIPick
         
     }
     
-    //  MARK: - Picker 
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return userManager.getPlayerList().count
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        let players = userManager.getPlayerList()
-        
-        return players[row].name
-    }
-    
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 75
-    }
+
 }
