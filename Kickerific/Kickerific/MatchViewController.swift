@@ -19,9 +19,7 @@ class MatchViewController: UITableViewController{
         super.viewDidLoad()
         
         matchList = gameManager.getMatchList()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "notificationArrived:", name: "matchUpdate", object: nil)
@@ -30,7 +28,11 @@ class MatchViewController: UITableViewController{
     }
     
     override func viewDidAppear(animated: Bool) {
-        
+        if let parent = self.parentViewController as? UITabBarController {
+            
+            self.tabBarItem.badgeValue = "\(matchList!.count)"
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {
