@@ -78,7 +78,7 @@ class GameManager: NSObject, GameManagerProtocol {
     func createGame(team1: Team, team2: Team, finished:(Bool) -> ()) {
 
         let p_team1: Team?
-        if let savedteam1 = getTeamForPlayers(team1.Player1, player2: team1.Player2) {
+        if let savedteam1 = getTeamForPlayers(team1.Player1!, player2: team1.Player2!) {
             p_team1 = savedteam1
         }
         else {
@@ -86,7 +86,7 @@ class GameManager: NSObject, GameManagerProtocol {
         }
         
         let p_team2: Team?
-        if let savedteam2 = getTeamForPlayers(team2.Player1, player2: team2.Player2) {
+        if let savedteam2 = getTeamForPlayers(team2.Player1!, player2: team2.Player2!) {
             p_team2 = savedteam2
         }
         else {
@@ -167,13 +167,13 @@ class GameManager: NSObject, GameManagerProtocol {
             
             if(count == 1) {
                 team.Player1 = arr[0]
-                team.teamName = team.Player1.name
+                team.teamName = team.Player1!.name
             }
             if(count == 2) {
                 team.Player1 = arr[0]
                 team.Player2 = arr[1]
             }
-            team.teamName = "\(team.Player1.name)"+"/"+"\(team.Player1.name)"
+            team.teamName = "\(team.Player1!.name)"+"/"+"\(team.Player1!.name)"
         }
         
         return team

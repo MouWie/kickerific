@@ -70,6 +70,7 @@
 		638338E31B307081003199CD /* UserManagingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638338E21B307081003199CD /* UserManagingTests.swift */; };
 		63AD63A91B3999D200F29525 /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD63A81B3999D200F29525 /* MatchViewController.swift */; };
 		63AD63AC1B399D2800F29525 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD63AB1B399D2800F29525 /* MatchTableViewCell.swift */; };
+		ACD134581B3B526900457C7E /* EditMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD134571B3B526900457C7E /* EditMatchViewController.swift */; };
 		ACD190F71B30D5AF00FC794C /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD190F61B30D5AF00FC794C /* Team.swift */; };
 		ACD190F81B30D5AF00FC794C /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD190F61B30D5AF00FC794C /* Team.swift */; };
 /* End PBXBuildFile section */
@@ -132,6 +133,7 @@
 		638338E21B307081003199CD /* UserManagingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManagingTests.swift; sourceTree = "<group>"; };
 		63AD63A81B3999D200F29525 /* MatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		63AD63AB1B399D2800F29525 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
+		ACD134571B3B526900457C7E /* EditMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMatchViewController.swift; sourceTree = "<group>"; };
 		ACD190F61B30D5AF00FC794C /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -300,6 +302,7 @@
 				63693D8C1B2F058800211995 /* SecondViewController.swift */,
 				638338DD1B305608003199CD /* PlayerTableViewController.swift */,
 				63AD63A81B3999D200F29525 /* MatchViewController.swift */,
+				ACD134571B3B526900457C7E /* EditMatchViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				632C5B131B31792700737613 /* ChallengeManager.swift in Sources */,
 				63693D891B2F058800211995 /* AppDelegate.swift in Sources */,
 				63AD63AC1B399D2800F29525 /* MatchTableViewCell.swift in Sources */,
+				ACD134581B3B526900457C7E /* EditMatchViewController.swift in Sources */,
 				632C5B161B31793500737613 /* ChallengeProtocol.swift in Sources */,
 				638338D21B3028A9003199CD /* SignUpViewController.swift in Sources */,
 				63693D8B1B2F058800211995 /* FirstViewController.swift in Sources */,
