@@ -24,6 +24,9 @@ class MatchViewController: UITableViewController{
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "notificationArrived:", name: "matchUpdate", object: nil)
         
+        self.refreshControl?.addTarget(self, action: "notificationArrived:", forControlEvents: UIControlEvents.ValueChanged)
+        
+        
         self.navigationController?.navigationItem.hidesBackButton = true
     }
     
@@ -45,6 +48,21 @@ class MatchViewController: UITableViewController{
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
+        if (gameManager.getMatchList().count == 0) {
+            
+            let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
+            messageLabel.text = "No matches currently.Challenge someone!"
+            
+            messageLabel.textColor = UIColor.whiteColor()
+            messageLabel.numberOfLines = 0;
+            messageLabel.textAlignment = NSTextAlignment.Center;
+            messageLabel.sizeToFit()
+            
+            self.tableView.backgroundView = messageLabel;
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None;
+            
+            return 0;
+        }
         return 1
     }
 
@@ -136,6 +154,7 @@ class MatchViewController: UITableViewController{
         
         gameManager.refreshMatches()
         self.tableView.reloadData()
+        refreshControl?.endRefreshing()
         
     }
     

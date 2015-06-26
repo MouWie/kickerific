@@ -114,5 +114,11 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
     @IBAction func save(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func saveMatch() {
+        
+        
+        
+    }
 
 }
