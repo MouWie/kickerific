@@ -13,8 +13,8 @@ public class Bootstrapper {
     public static func initializeServices() {
         
         //log.debug("[Bootstrapper] initializeServices()")
-        ServiceLocator.sharedInstance.set(GameManagerProtocol.self, instance:GameManager())
         ServiceLocator.sharedInstance.set(UserManagerProtocol.self, instance: UserManager())
+        ServiceLocator.sharedInstance.set(GameManagerProtocol.self, instance:GameManager())
         ServiceLocator.sharedInstance.set(ChallengeProtocol.self, instance: ChallengeManager())
         ServiceLocator.sharedInstance.set(StorageManagerProtocol.self, instance: StorageManager())
     }

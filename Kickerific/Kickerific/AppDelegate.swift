@@ -80,14 +80,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotifications()
         }
         
-        //Initialize Challenge Manager, get already stored challanges
-        let challengeManager = Managers.Challenge
-        challengeManager.initialize()
-        
-        //Initialize Game Manager, get already stored matches
-        let gameManager = Managers.Game
-        gameManager.initialize()
-        
         //User Notification if app running
         
         if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {

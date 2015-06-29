@@ -11,9 +11,12 @@ import Parse
 class GameManager: NSObject, GameManagerProtocol {
     
     var matchList: Array<Match>?
+    var playerMatchList: Array<Match>?
     
     func initialize() {
-        matchList = getMatchListFromRemote()
+        let userManager = Managers.User
+        matchList = getMatchListFromRemote(false)
+        playerMatchList = getPlayerMatchList()
     }
     
     func refreshMatches() {
@@ -95,7 +98,8 @@ class GameManager: NSObject, GameManagerProtocol {
         
         let match = createLocalGame(p_team1!, team2: p_team2!)
         saveRemoteGame(match, finished: { (success) -> () in
-            self.matchList = self.getMatchListFromRemote()
+            // reload match List
+            self.matchList = self.getMatchListFromRemote(false)
             if(success) {
                 finished(true)
             }
@@ -113,11 +117,30 @@ class GameManager: NSObject, GameManagerProtocol {
         }
     }
     
-    func getMatchListFromRemote() -> Array<Match> {
+    func getMatchListFromRemote(finished: Bool) -> Array<Match> {
         
         var query = PFQuery(className: "Match")
-        query.whereKey("finished", equalTo: NSNumber(bool: false))
+        query.whereKey("finished", equalTo: NSNumber(bool: finished))
         let array: Array<Match> = query.findObjects() as! Array<Match>
+        
+        return array
+        
+    }
+    
+    func getMatchListForTeamFromRemote(team:Team, finished: Bool) -> Array<Match> {
+        
+        var query = PFQuery(className: "Match")
+        query.whereKey("Team1", equalTo: team)
+        query.whereKey("finished", equalTo: NSNumber(bool: finished))
+        var array: Array<Match> = query.findObjects() as! Array<Match>
+        
+        var query2 = PFQuery(className: "Match")
+        query.whereKey("Team2", equalTo: team)
+        query2.whereKey("finished", equalTo: NSNumber(bool: finished))
+        
+        let array2: Array<Match> = query.findObjects() as! Array<Match>
+        
+        array.extend(array2);
         
         return array
         
@@ -129,7 +152,31 @@ class GameManager: NSObject, GameManagerProtocol {
             return matchList!
         }
         else {
-            return getMatchListFromRemote()
+            matchList = getMatchListFromRemote(false)
+            return matchList!
+        }
+    }
+    
+    func getPlayerMatchList() -> Array<Match> {
+        
+        if(playerMatchList != nil) {
+            return playerMatchList!
+        }
+        else {
+            let userManager = Managers.User
+            
+            let teamsArray:Array<Team> = getTeamsForPlayer(userManager.getCurrentPlayer()!)
+            var resultsArray: Array<Match> = []
+            
+            for team in teamsArray {
+                
+                let arr = getMatchListForTeamFromRemote(team, finished: false)
+                resultsArray.extend(arr)
+            }
+            
+            playerMatchList = resultsArray
+            
+            return playerMatchList!
         }
     }
     
@@ -138,6 +185,20 @@ class GameManager: NSObject, GameManagerProtocol {
         var query = PFQuery(className: "Match")
         query.fromLocalDatastore()
         let array: Array<Match> = query.findObjects() as! Array<Match>
+        
+        return array
+    }
+    
+    func getTeamsForPlayer(player:Player) -> Array<Team> {
+        
+        var query = PFQuery(className: "Team")
+        query.whereKey("Player1", equalTo: player)
+        var array: Array<Team> = query.findObjects() as! Array<Team>
+        
+        var query2 = PFQuery(className: "Team")
+        query.whereKey("Player2", equalTo: player)
+        let array2: Array<Team> = query.findObjects() as! Array<Team>
+        array.extend(array2)
         
         return array
     }

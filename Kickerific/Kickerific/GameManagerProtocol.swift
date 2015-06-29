@@ -17,9 +17,14 @@ import Foundation
     func initialize()
     
     /**
-    *  get list of matches
+    *  get list of all matches
     */
     func getMatchList() -> Array<Match>
+    
+    /**
+    *  get MatchList for Current Player
+    */
+    func getPlayerMatchList() -> Array<Match>
     
     /**
     *  refrseshes matchList

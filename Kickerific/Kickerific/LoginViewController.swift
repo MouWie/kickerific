@@ -34,9 +34,17 @@ class LoginViewController: UIViewController {
         var currentUser: AnyObject? = userManager?.getCurrentUser()
         if currentUser is PFUser {
             // Do stuff with the user
+        
             userManager?.initialize({ (finished) -> () in
                 if(finished) {
                    self.navigationController!.performSegueWithIdentifier("loginSegue", sender: nil)
+                    //Initialize Challenge Manager, get already stored challanges
+                    let challengeManager = Managers.Challenge
+                    challengeManager.initialize()
+                    
+                    //Initialize Game Manager, get already stored matches
+                    let gameManager = Managers.Game
+                    gameManager.initialize()
                 }
             })
         }
@@ -74,6 +82,14 @@ class LoginViewController: UIViewController {
                 self.userManager?.initialize({ (finished) -> () in
                     if(finished) {
                         self.navigationController!.performSegueWithIdentifier("loginSegue", sender: sender)
+                        
+                        //Initialize Challenge Manager, get already stored challanges
+                        let challengeManager = Managers.Challenge
+                        challengeManager.initialize()
+                        
+                        //Initialize Game Manager, get already stored matches
+                        let gameManager = Managers.Game
+                        gameManager.initialize()
                     }
                 })
             }

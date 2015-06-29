@@ -77,7 +77,6 @@ class ChallengeViewController: UIViewController {
             
             gameManager.createGame(team1, team2: team2, finished: { (success) -> () in
                 if(success) {
-                    gameManager.refreshMatches()
                     NSNotificationCenter.defaultCenter().postNotificationName("gameUpdate", object: nil)
                 }
             })
