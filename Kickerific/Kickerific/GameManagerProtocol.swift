@@ -42,4 +42,8 @@ import Foundation
     */
     func createTeamFromArray(arr:Array<Player>) -> Team
     
+    /**
+    *  save a game remote in database 
+    */
+    func saveRemoteGame(match: Match, finished: (Bool) -> ())
 }
