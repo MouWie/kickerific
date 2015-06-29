@@ -15,6 +15,8 @@ class Team: PFObject, PFSubclassing {
     @NSManaged var Player1: Player?
     @NSManaged var Player2: Player?
     @NSManaged var teamName: String
+    @NSManaged var Wins: NSNumber?
+    @NSManaged var Losses: NSNumber?
     
     override class func initialize() {
         struct Static {

@@ -1,3 +1,4 @@
+
 //
 //  EditMatchViewController.swift
 //  Kickerific
@@ -7,10 +8,12 @@
 //
 
 import UIKit
+import Parse
 
 class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate  {
     
     var userManager:UserManagerProtocol = Managers.User
+    var userList: Array<Player>?
     var match: Match?
     @IBOutlet weak var score1TextField: UITextField!
     
@@ -24,11 +27,16 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        userList = userManager.getPlayerList()
+        
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
     }
+    
     
     override func viewDidAppear(animated: Bool) {
         prepareSliders()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,6 +44,11 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
         // Dispose of any resources that can be recreated.
     }
     
+    func dismissKeyboard() {
+        
+        self.view.endEditing(true)
+        
+    }
 
     /*
     // MARK: - Navigation
@@ -53,11 +66,11 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return userManager.getPlayerList().count
+        return userList!.count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        let players = userManager.getPlayerList()
+        let players = userList!
         
         return players[row].name
     }
@@ -68,7 +81,8 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-    }
+        
+     }
     
     
     func prepareSliders() {
@@ -96,11 +110,7 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
                 picker4.selectRow(i, inComponent: 0, animated: true)
                 
             }
-            
         }
-
-        
-        
     }
     
     //MARK: Actions
@@ -112,12 +122,27 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     
     @IBAction func save(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        saveMatch { (finished) -> () in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
-    func saveMatch() {
+    func saveMatch(block:(ready:Bool)->()) {
+        self.match?.Team1.Player1 = userList![picker1.selectedRowInComponent(0)]
+        self.match?.Team1.Player2 = userList![picker2.selectedRowInComponent(0)]
+        self.match?.Team2.Player1 = userList![picker3.selectedRowInComponent(0)]
+        self.match?.Team2.Player2 = userList![picker4.selectedRowInComponent(0)]
         
+        let score1 = score1TextField.text.toInt()
+        self.match?.team1Score = NSNumber(integer: score1!)
+        let score2 = score2TextField.text.toInt()
+        self.match?.team2Score = NSNumber(integer: score2!)
         
+        self.match?.finished = true
+        match?.ACL = PFACL(user: PFUser.currentUser()!)
+        match?.saveInBackground()
+        let gameManager = Managers.Game
+        block(ready: true)
         
     }
 

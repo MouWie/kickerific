@@ -21,7 +21,19 @@ class TabBarViewController: UITabBarController {
         userManager = ServiceLocator.sharedInstance.get(UserManagerProtocol) as! UserManager
         let currentUser:PFUser = userManager?.getCurrentUser() as! PFUser
         
+        let challengeManager = Managers.Challenge
+        let gameManager = Managers.Game
+        
         welcomeLabel.text = "Hello \(currentUser.username!)! Ready to play?"
+        
+        // Initialize Items
+        
+        let items = self.tabBar.items as NSArray!
+        var tabItem = items.objectAtIndex(0) as! UITabBarItem
+        tabItem.badgeValue = "\(challengeManager.getChallengedPlayers().count)"
+        
+        var tabItem2 = items.objectAtIndex(1) as! UITabBarItem
+        tabItem2.badgeValue = "\(gameManager.getPlayerMatchList().count)"
         
         self.navigationController?.navigationItem.hidesBackButton = true
         self.navigationItem.hidesBackButton = true

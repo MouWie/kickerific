@@ -21,7 +21,8 @@ class LoginViewController: UIViewController {
         self.navigationController?.navigationItem.hidesBackButton = true
         userManager = ServiceLocator.sharedInstance.get(UserManagerProtocol) as! UserManager
  
-        // Do any additional setup after loading the view.
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
 
     }
     
@@ -63,6 +64,12 @@ class LoginViewController: UIViewController {
             
             
         }
+    }
+    
+    func dismissKeyboard() {
+        
+        self.view.endEditing(true)
+        
     }
     
     

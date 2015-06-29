@@ -69,7 +69,7 @@ class MatchViewController: UITableViewController{
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return gameManager.getMatchList().count
+        return gameManager.getPlayerMatchList().count
     }
 
     
@@ -153,9 +153,11 @@ class MatchViewController: UITableViewController{
     func notificationArrived(notification: NSNotification) {
         
         gameManager.refreshMatches()
+        matchList = gameManager.getPlayerMatchList()
         self.tableView.reloadData()
         refreshControl?.endRefreshing()
-        
+        self.tabBarItem.badgeValue = "\(matchList!.count)"
+
     }
     
 

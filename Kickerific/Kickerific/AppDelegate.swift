@@ -177,7 +177,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 var tabItem = tabArray.objectAtIndex(1) as! UITabBarItem
                                 tabItem.badgeValue = "New"
                                 
-                                NSNotificationCenter.defaultCenter().postNotificationName("gameUpdate", object: nil)
+                                NSNotificationCenter.defaultCenter().postNotificationName("matchUpdate", object: nil)
                                 NSNotificationCenter.defaultCenter().postNotificationName("challengeUpdate", object: nil)
                             })
                         }
