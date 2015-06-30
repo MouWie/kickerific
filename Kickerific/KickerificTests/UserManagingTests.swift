@@ -16,7 +16,7 @@ class UserManagingTests: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        //Bootstrapper.initializeServices()
+        Bootstrapper.initializeServices()
         //Bootstrapper.initializeParseFunctions()
     }
     
@@ -24,7 +24,7 @@ class UserManagingTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
+    
     func test_userAuthenticationWorks_works() {
         
         //setup
@@ -33,19 +33,17 @@ class UserManagingTests: XCTestCase {
         let userManager: Optional<AnyObject> = ServiceLocator.sharedInstance.get(UserManagerProtocol)
         
         //currentUser should be nil when logged out
-        let currentUser = PFUser.currentUser()
-        
-        XCTAssertNil(currentUser, "current user is nil")
-        
-        // log in 
-        userManager!.loginUserWithPass(user, password: pass, finished: { (error) -> () in
-            //currentUser should be not nil when logged in
-            let currentUser = PFUser.currentUser()
-            XCTAssertNil(error, "error must be nil")
+        if let currentUser = PFUser.currentUser() {
             XCTAssertNotNil(currentUser, "current user is not nil")
-            
-        })
-        
+        }
+        else {
+            userManager!.loginUserWithPass(user, password: pass, finished: { (error) -> () in
+                //currentUser should be not nil when logged in
+                let currentUser = PFUser.currentUser()
+                XCTAssertNil(error, "error must be nil")
+                XCTAssertNotNil(currentUser, "current user is not nil")
+            })
+        }
     }
     
     func test_userHasCorrespondingPlayerObject_works() {
@@ -53,7 +51,7 @@ class UserManagingTests: XCTestCase {
         let userManager: Optional<AnyObject> = ServiceLocator.sharedInstance.get(UserManagerProtocol)
         userManager?.initialize({ (finished) -> () in
             let player = userManager?.getCurrentPlayer()
-            XCTAssertNotNil(player, "player object should be there")
+            XCTAssertNotNil(player!, "player object should be there")
         })
 
     }
@@ -67,6 +65,8 @@ class UserManagingTests: XCTestCase {
         XCTAssertNil(currentUser, "user must be nil")
     }
 
+    
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {

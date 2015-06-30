@@ -25,12 +25,6 @@ class GameSetupTest: XCTestCase {
         // This is an example of a functional test case.
         XCTAssert(true, "Pass")
     }
-    
-    func test_shouldSetupAndStartGame_succeeds() {
-        
-        
-        
-    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

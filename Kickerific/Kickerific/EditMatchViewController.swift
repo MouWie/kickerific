@@ -84,6 +84,12 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
         
      }
     
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let string = "myString"
+        let players = userList!
+        return NSAttributedString(string: players[row].name, attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+    }
+    
     
     func prepareSliders() {
         
@@ -123,7 +129,15 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     @IBAction func save(sender: AnyObject) {
         saveMatch { (finished) -> () in
-            self.dismissViewControllerAnimated(true, completion: nil)
+            if (finished) {
+                self.dismissViewControllerAnimated(true, completion: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName("matchUpdate", object: nil)
+            }
+            else {
+                self.match?.saveEventually()
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
         }
     }
     
@@ -140,9 +154,16 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
         
         self.match?.finished = true
         match?.ACL = PFACL(user: PFUser.currentUser()!)
-        match?.saveInBackground()
-        let gameManager = Managers.Game
-        block(ready: true)
+        match?.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if(error == nil) {
+                block(ready: true)
+            }
+            else {
+                block(ready: false)
+            }
+            
+        })
+        
         
     }
 

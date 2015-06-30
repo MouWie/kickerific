@@ -22,28 +22,28 @@ import Foundation
     func getMatchList() -> Array<Match>
     
     /**
-    *  get MatchList for Current Player
+    *  get matchList for Current Player
     */
     func getPlayerMatchList() -> Array<Match>
     
     /**
-    *  refrseshes matchList
+    *  refreshes matchList
     */
     func refreshMatches()
     
     /**
-    *  Creates game
+    *  Creates a new game
     */
     
     func createGame(team1: Team, team2: Team, finished:(Bool) -> ())
     
     /**
-    *  Create a team from array
+    *  Creates a team object from array
     */
     func createTeamFromArray(arr:Array<Player>) -> Team
     
     /**
-    *  save a game remote in database 
+    *  saves/updates a game remote in database
     */
     func saveRemoteGame(match: Match, finished: (Bool) -> ())
 }
