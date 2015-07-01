@@ -35,6 +35,7 @@ class KickerifficTests: XCTestCase {
         XCTAssert ( arr1 != copy)
         XCTAssert ( arr1.count == 1)
         XCTAssert (copy.count == 2)
+        
     }
     
     func test_Threading() {

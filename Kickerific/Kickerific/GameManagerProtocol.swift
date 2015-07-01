@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Parse
 
 @objc protocol GameManagerProtocol {
     
@@ -46,4 +46,20 @@ import Foundation
     *  saves/updates a game remote in database
     */
     func saveRemoteGame(match: Match, finished: (Bool) -> ())
+    
+    /**
+    *  validates a finished match 
+    */
+    func validateFinishedMatch(match: Match)
+    
+    /**
+    *  sets a team name for a given team
+    */
+    func setTeamNameForTeam(team: Team)
+    
+    /**
+    *  fetch an object
+    */
+    
+    func fetchObject(obj: PFObject?) -> PFObject
 }

@@ -40,16 +40,20 @@ class GameManager: NSObject, GameManagerProtocol {
     }
     
     
-    func saveRemoteTeam(team: Team) -> Team? {
+    func saveRemoteTeam(team: Team, finished: (Bool) -> ()){
         
-        let saved = team.save()
+        team.saveInBackgroundWithBlock { (success, error) -> Void in
+            
+            if (success) {
+                finished(true)
+            }
+            else {
+                finished(false)
+            }
+            
+        }
         
-        if(saved) {
-           return team
-        }
-        else {
-            return nil
-        }
+        
     }
     
     func saveRemoteGame(match: Match, finished: (Bool) -> ()) {
@@ -68,12 +72,15 @@ class GameManager: NSObject, GameManagerProtocol {
     
     func createGame(team1: Team, team2: Team, finished:(Bool) -> ()) {
         
+        // TO FIX 
         let p_team1: Team?
         if let savedteam1 = getTeamForPlayers(team1.Player1, player2: team1.Player2) {
             p_team1 = savedteam1
         }
         else {
-            p_team1 = saveRemoteTeam(team1)
+            saveRemoteTeam(team1, finished: { (success) -> () in
+                
+            })
         }
         
         let p_team2: Team?
@@ -81,10 +88,13 @@ class GameManager: NSObject, GameManagerProtocol {
             p_team2 = savedteam2
         }
         else {
-            p_team2 = saveRemoteTeam(team2)
+            saveRemoteTeam(team2, finished: { (success) -> () in
+                
+            })
         }
         
-        let match = createLocalGame(p_team1!, team2: p_team2!)
+        
+        let match = createLocalGame(team1, team2: team2)
         saveRemoteGame(match, finished: { (success) -> () in
             // reload match List
             self.matchList = self.getMatchListFromRemote(false)
@@ -254,6 +264,75 @@ class GameManager: NSObject, GameManagerProtocol {
         return team
     }
     
+    func setTeamNameForTeam(team: Team) {
+        
+        let teamName: String?
+        
+        if(team.Player1 != nil) {
+            team.teamName = "\(team.Player1!.name)"+"/"+"\(team.Player1!.name)"
+            
+            if(team.Player2 != nil) {
+                team.teamName = "\(team.Player1!.name)"+"/"+"\(team.Player2!.name)"
+            }
+        }
+
+    }
     
+    func validateFinishedMatch(match: Match) {
+        
+        match.ACL = PFACL(user: PFUser.currentUser()!)
+        match.Team1.ACL = PFACL(user: PFUser.currentUser()!)
+        match.Team2.ACL = PFACL(user: PFUser.currentUser()!)
+        
+        
+        let team1 = match.Team1
+        let team2 = match.Team2
+        
+        //increment winning team, decrement loosing team
+        if (match.team1Score.integerValue > match.team2Score.integerValue) {
+            
+            team1.incrementKey("Wins")
+            team1.Player1?.incrementKey("numberOfWins")
+            team1.Player2?.incrementKey("numberOfWins")
+            
+            team2.incrementKey("Losses", byAmount: NSNumber(integer: -1))
+            team2.Player1?.incrementKey("Losses", byAmount: NSNumber(integer: -1))
+            team2.Player2?.incrementKey("Losses", byAmount: NSNumber(integer: -1))
+            
+        }
+        else if (match.team1Score.integerValue < match.team2Score.integerValue) {
+            team1.incrementKey("Losses")
+            team1.Player1?.incrementKey("Losses", byAmount: NSNumber(integer: -1))
+            team1.Player2?.incrementKey("Losses", byAmount: NSNumber(integer: -1))
+            
+            team2.incrementKey("Wins")
+            team2.Player1?.incrementKey("numberOfWins")
+            team2.Player2?.incrementKey("numberOfWins")
+        }
+        
+        refreshScorePointsForPlayer(team1.Player1!)
+        refreshScorePointsForPlayer(team1.Player2!)
+        
+        refreshScorePointsForPlayer(team2.Player1!)
+        refreshScorePointsForPlayer(team2.Player2!)
+        match.save()
+    }
     
+    func refreshScorePointsForPlayer(player: Player) {
+        
+        let newScore = player.numberOfWins.integerValue - player.numberOfDefeat.integerValue
+        player.kickerPoints = NSNumber(integer: newScore)
+        player.ACL = PFACL(user: PFUser.currentUser()!)
+        player.save()
+    }
+    
+    func fetchObject(obj: PFObject?) -> PFObject {
+        
+        if let object = obj {
+            obj!.ACL = PFACL(user: PFUser.currentUser()!)
+            obj!.fetchIfNeeded()
+            
+        }
+        return obj!
+    }
 }

@@ -86,14 +86,9 @@ class PlayerTableViewController: UITableViewController {
             cell.imageView?.image = UIImage(named: "funnycat")
         }
         else {
-            // check if there are already open challenges
-            if let players = challengedPlayerArray {
-                for player in players {
-                    if cell.textLabel?.text == player.name {
-                        cellDeactivated(cell)
-                    }
-                }
-            }
+            // check if there are already open challenges             
+                cell.textLabel?.text == text
+                cellDeactivated(cell)
         }
         
         

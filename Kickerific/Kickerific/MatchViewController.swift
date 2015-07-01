@@ -96,6 +96,7 @@ class MatchViewController: UITableViewController{
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let editMatchController: EditMatchViewController = storyboard.instantiateViewControllerWithIdentifier("EditMatchViewController") as! EditMatchViewController
         editMatchController.match = selectedMatch
+        
         self.presentViewController(editMatchController, animated: true, completion: nil)
     }
 

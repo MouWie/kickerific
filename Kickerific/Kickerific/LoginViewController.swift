@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.navigationController?.navigationItem.hidesBackButton = true
         userManager = ServiceLocator.sharedInstance.get(UserManagerProtocol) as! UserManager
  
@@ -32,10 +32,12 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        
+        //check for logged in user
         var currentUser: AnyObject? = userManager?.getCurrentUser()
         if currentUser is PFUser {
             // Do stuff with the user
-        
+            
             userManager?.initialize({ (finished) -> () in
                 if(finished) {
                    self.navigationController!.performSegueWithIdentifier("loginSegue", sender: nil)
@@ -72,7 +74,7 @@ class LoginViewController: UIViewController {
         
     }
     
-    
+
     
     @IBAction func login(sender: AnyObject) {
         

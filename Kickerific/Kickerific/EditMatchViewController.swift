@@ -13,6 +13,7 @@ import Parse
 class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate  {
     
     var userManager:UserManagerProtocol = Managers.User
+    var gameManager:GameManagerProtocol = Managers.Game
     var userList: Array<Player>?
     var match: Match?
     @IBOutlet weak var score1TextField: UITextField!
@@ -98,6 +99,12 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
         for (var i = 0; i < playerlist.count; ++i) {
             
             let player = playerlist[i]
+            
+            gameManager.fetchObject(self.match!.Team1.Player1)
+            gameManager.fetchObject(self.match!.Team1.Player2)
+            gameManager.fetchObject(self.match!.Team2.Player1)
+            gameManager.fetchObject(self.match!.Team2.Player2)
+                        
             if(player.name == self.match?.Team1.Player1?.name) {
                 // set first slider
                 picker1.selectRow(i, inComponent: 0, animated: true)
@@ -131,11 +138,14 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
         saveMatch { (finished) -> () in
             if (finished) {
                 self.dismissViewControllerAnimated(true, completion: nil)
+                //self.gameManager.validateFinishedMatch(self.match!)
                 NSNotificationCenter.defaultCenter().postNotificationName("matchUpdate", object: nil)
             }
             else {
                 self.match?.saveEventually()
+                //self.gameManager.validateFinishedMatch(self.match!)
                 self.dismissViewControllerAnimated(true, completion: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName("matchUpdate", object: nil)
             }
             
         }
@@ -151,6 +161,11 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
         self.match?.team1Score = NSNumber(integer: score1!)
         let score2 = score2TextField.text.toInt()
         self.match?.team2Score = NSNumber(integer: score2!)
+        
+        gameManager.setTeamNameForTeam(match!.Team1)
+        gameManager.setTeamNameForTeam(match!.Team2)
+        
+        gameManager.validateFinishedMatch(match!)
         
         self.match?.finished = true
         match?.ACL = PFACL(user: PFUser.currentUser()!)
