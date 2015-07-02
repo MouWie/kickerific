@@ -100,28 +100,39 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
             
             let player = playerlist[i]
             
-            gameManager.fetchObject(self.match!.Team1.Player1)
-            gameManager.fetchObject(self.match!.Team1.Player2)
-            gameManager.fetchObject(self.match!.Team2.Player1)
-            gameManager.fetchObject(self.match!.Team2.Player2)
-                        
-            if(player.name == self.match?.Team1.Player1?.name) {
-                // set first slider
-                picker1.selectRow(i, inComponent: 0, animated: true)
-            }
-            else if(player.name == self.match?.Team1.Player2?.name) {
-                //set second slider
-                picker2.selectRow(i, inComponent: 0, animated: true)
+            if let pl1 = self.match!.Team1.Player1 {
+                gameManager.fetchObject(pl1)
+                if(player.name == self.match?.Team1.Player1?.name) {
+                    // set first slider
+                    picker1.selectRow(i, inComponent: 0, animated: true)
+                }
             }
             
-            if(player.name == self.match?.Team2.Player1?.name) {
-                //set third slider
-                picker3.selectRow(i, inComponent: 0, animated: true)
+            if let pl2 = self.match!.Team1.Player2 {
+                gameManager.fetchObject(pl2)
+                if(player.name == self.match?.Team1.Player2?.name) {
+                    //set second slider
+                    picker2.selectRow(i, inComponent: 0, animated: true)
+                }
             }
-            else if (player.name == self.match?.Team1.Player2?.name) {
-                //set fourth slider
-                picker4.selectRow(i, inComponent: 0, animated: true)
+            
+            if let pl3 = self.match!.Team2.Player1 {
+                gameManager.fetchObject(pl3)
                 
+                if(player.name == self.match?.Team2.Player1?.name) {
+                    //set third slider
+                    picker3.selectRow(i, inComponent: 0, animated: true)
+                }
+            }
+            
+            if let pl4 = self.match!.Team2.Player2 {
+                gameManager.fetchObject(pl4)
+                
+                if (player.name == self.match?.Team2.Player2?.name) {
+                    //set fourth slider
+                    picker4.selectRow(i, inComponent: 0, animated: true)
+                    
+                }
             }
         }
     }

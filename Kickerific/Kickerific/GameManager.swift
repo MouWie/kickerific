@@ -76,35 +76,74 @@ class GameManager: NSObject, GameManagerProtocol {
         let p_team1: Team?
         if let savedteam1 = getTeamForPlayers(team1.Player1, player2: team1.Player2) {
             p_team1 = savedteam1
+            
+            let p_team2: Team?
+            if let savedteam2 = getTeamForPlayers(team2.Player1, player2: team2.Player2) {
+                p_team2 = savedteam2
+                let match = self.createLocalGame(team1, team2: p_team2!)
+                self.saveRemoteGame(match, finished: { (success) -> () in
+                    // reload match List
+                    self.matchList = self.getMatchListFromRemote(false)
+                    if(success) {
+                        finished(true)
+                    }
+                    else {
+                        finished(false)
+                    }
+                })
+            }
+            else {
+                saveRemoteTeam(team2, finished: { (success) -> () in
+                    let match = self.createLocalGame(team1, team2: team2)
+                    self.saveRemoteGame(match, finished: { (success) -> () in
+                        // reload match List
+                        self.matchList = self.getMatchListFromRemote(false)
+                        if(success) {
+                            finished(true)
+                        }
+                        else {
+                            finished(false)
+                        }
+                    })
+                })
+            }
+
         }
         else {
             saveRemoteTeam(team1, finished: { (success) -> () in
-                
+                let p_team2: Team?
+                if let savedteam2 = self.getTeamForPlayers(team2.Player1, player2: team2.Player2) {
+                    p_team2 = savedteam2
+                    let match = self.createLocalGame(team1, team2: p_team2!)
+                    self.saveRemoteGame(match, finished: { (success) -> () in
+                        // reload match List
+                        self.matchList = self.getMatchListFromRemote(false)
+                        if(success) {
+                            finished(true)
+                        }
+                        else {
+                            finished(false)
+                        }
+                    })
+                }
+                else {
+                    self.saveRemoteTeam(team2, finished: { (success) -> () in
+                        let match = self.createLocalGame(team1, team2: team2)
+                        self.saveRemoteGame(match, finished: { (success) -> () in
+                            // reload match List
+                            self.matchList = self.getMatchListFromRemote(false)
+                            if(success) {
+                                finished(true)
+                            }
+                            else {
+                                finished(false)
+                            }
+                        })
+                    })
+                }
+
             })
         }
-        
-        let p_team2: Team?
-        if let savedteam2 = getTeamForPlayers(team2.Player1, player2: team2.Player2) {
-            p_team2 = savedteam2
-        }
-        else {
-            saveRemoteTeam(team2, finished: { (success) -> () in
-                
-            })
-        }
-        
-        
-        let match = createLocalGame(team1, team2: team2)
-        saveRemoteGame(match, finished: { (success) -> () in
-            // reload match List
-            self.matchList = self.getMatchListFromRemote(false)
-            if(success) {
-                finished(true)
-            }
-            else {
-                finished(false)
-            }
-        })
     }
     
     func closeGame(match: Match, finished:(Bool) -> ()) {
@@ -329,8 +368,10 @@ class GameManager: NSObject, GameManagerProtocol {
     func fetchObject(obj: PFObject?) -> PFObject {
         
         if let object = obj {
-            obj!.ACL = PFACL(user: PFUser.currentUser()!)
-            obj!.fetchIfNeeded()
+            let pfacl = PFACL(user: PFUser.currentUser()!)
+            pfacl.setReadAccess(true, forUser: PFUser.currentUser()!)
+            obj?.ACL = pfacl
+            obj?.fetchIfNeeded()
             
         }
         return obj!
