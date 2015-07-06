@@ -194,7 +194,7 @@
 		63693D851B2F058800211995 /* Kickerific */ = {
 			isa = PBXGroup;
 			children = (
-				638338D41B3028B2003199CD /* ViewControllers */,
+				638338D41B3028B2003199CD /* TabViewControllers */,
 				638338CE1B30281B003199CD /* LoginViewController.swift */,
 				638338D11B3028A9003199CD /* SignUpViewController.swift */,
 				638338BF1B3013C8003199CD /* Model */,
@@ -292,7 +292,7 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		638338D41B3028B2003199CD /* ViewControllers */ = {
+		638338D41B3028B2003199CD /* TabViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				63AD63AA1B399CEE00F29525 /* CustomViews */,
@@ -304,7 +304,7 @@
 				63AD63A81B3999D200F29525 /* MatchViewController.swift */,
 				ACD134571B3B526900457C7E /* EditMatchViewController.swift */,
 			);
-			name = ViewControllers;
+			name = TabViewControllers;
 			sourceTree = "<group>";
 		};
 		63AD63AA1B399CEE00F29525 /* CustomViews */ = {
