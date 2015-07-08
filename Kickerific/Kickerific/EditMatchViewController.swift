@@ -179,7 +179,6 @@ class EditMatchViewController: UIViewController, UIPickerViewDataSource, UIPicke
         gameManager.validateFinishedMatch(match!)
         
         self.match?.finished = true
-        match?.ACL = PFACL(user: PFUser.currentUser()!)
         match?.saveInBackgroundWithBlock({ (success, error) -> Void in
             if(error == nil) {
                 block(ready: true)

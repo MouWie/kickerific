@@ -57,6 +57,13 @@ public class Bootstrapper {
         }
     }
     
+    class var Ranking: ChallengeProtocol {
+        get {
+            return ServiceLocator.sharedInstance.get(ChallengeProtocol.self) as! ChallengeProtocol
+        }
+    }
+
+    
     /*
     class var Navigation : INavigationManager {
     get {

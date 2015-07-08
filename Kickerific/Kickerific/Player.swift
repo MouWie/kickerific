@@ -15,6 +15,7 @@ class Player : PFObject, PFSubclassing {
     @NSManaged var name: String
     @NSManaged var numberOfWins: NSNumber
     @NSManaged var numberOfDefeat: NSNumber
+    @NSManaged var numberOfGames: NSNumber
     @NSManaged var kickerPoints: NSNumber
     
     override class func initialize() {

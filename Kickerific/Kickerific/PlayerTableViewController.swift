@@ -24,6 +24,7 @@ class PlayerTableViewController: UITableViewController {
         
         playerArray = userManager?.getPlayerList()
         challengedPlayerArray = challengeManager?.getChallengedPlayers()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -86,9 +87,14 @@ class PlayerTableViewController: UITableViewController {
             cell.imageView?.image = UIImage(named: "funnycat")
         }
         else {
-            // check if there are already open challenges             
-                cell.textLabel?.text == text
-                cellDeactivated(cell)
+            // check if there are already open challenges   
+            cell.textLabel?.text == text
+            for challengedPlayer in challengedPlayerArray! {
+                if challengedPlayer.name == player.name {
+                    cellDeactivated(cell)
+                }
+            }
+            
         }
         
         

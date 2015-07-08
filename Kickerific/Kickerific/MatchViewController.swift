@@ -34,7 +34,7 @@ class MatchViewController: UITableViewController{
         if let parent = self.parentViewController as? UITabBarController {
             
             self.tabBarItem.badgeValue = "\(matchList!.count)"
-            
+            self.tableView.reloadData()
         }
     }
     
@@ -51,7 +51,7 @@ class MatchViewController: UITableViewController{
         if (gameManager.getMatchList().count == 0) {
             
             let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
-            messageLabel.text = "No matches currently.Challenge someone!"
+            messageLabel.text = "No matches currently. Challenge someone!"
             
             messageLabel.textColor = UIColor.whiteColor()
             messageLabel.numberOfLines = 0;

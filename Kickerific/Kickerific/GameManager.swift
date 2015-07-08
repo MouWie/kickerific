@@ -319,11 +319,6 @@ class GameManager: NSObject, GameManagerProtocol {
     
     func validateFinishedMatch(match: Match) {
         
-        match.ACL = PFACL(user: PFUser.currentUser()!)
-        match.Team1.ACL = PFACL(user: PFUser.currentUser()!)
-        match.Team2.ACL = PFACL(user: PFUser.currentUser()!)
-        
-        
         let team1 = match.Team1
         let team2 = match.Team2
         
@@ -332,28 +327,47 @@ class GameManager: NSObject, GameManagerProtocol {
             
             team1.incrementKey("Wins")
             team1.Player1?.incrementKey("numberOfWins")
-            team1.Player2?.incrementKey("numberOfWins")
+            team1.Player1?.incrementKey("numberOfGames")
+            refreshScorePointsForPlayer(team1.Player1!)
             
+            if(team1.Player1?.name != team1.Player2?.name) {
+                team1.Player2?.incrementKey("numberOfWins")
+                team1.Player2?.incrementKey("numberOfGames")
+                refreshScorePointsForPlayer(team1.Player2!)
+            }
             team2.incrementKey("Losses", byAmount: NSNumber(integer: -1))
-            team2.Player1?.incrementKey("Losses", byAmount: NSNumber(integer: -1))
-            team2.Player2?.incrementKey("Losses", byAmount: NSNumber(integer: -1))
-            
+            team2.Player1?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+            team2.Player1?.incrementKey("numberOfGames")
+            refreshScorePointsForPlayer(team2.Player1!)
+            if (team2.Player1?.name != team2.Player2?.name) {
+                team2.Player2?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+                team2.Player2?.incrementKey("numberOfGames")
+                refreshScorePointsForPlayer(team2.Player2!)
+            }
         }
         else if (match.team1Score.integerValue < match.team2Score.integerValue) {
-            team1.incrementKey("Losses")
-            team1.Player1?.incrementKey("Losses", byAmount: NSNumber(integer: -1))
-            team1.Player2?.incrementKey("Losses", byAmount: NSNumber(integer: -1))
+            team1.incrementKey("numberOfDefeat")
+            team1.Player1?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+            team1.Player1?.incrementKey("numberOfGames")
+            refreshScorePointsForPlayer(team1.Player1!)
+            if(team1.Player1?.name != team1.Player2?.name) {
+                team1.Player2?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+                team1.Player2?.incrementKey("numberOfGames")
+                refreshScorePointsForPlayer(team1.Player2!)
+            }
             
             team2.incrementKey("Wins")
             team2.Player1?.incrementKey("numberOfWins")
-            team2.Player2?.incrementKey("numberOfWins")
+            team2.Player1?.incrementKey("numberOfGames")
+            refreshScorePointsForPlayer(team2.Player1!)
+            if(team2.Player1?.name != team2.Player2?.name) {
+                team2.Player2?.incrementKey("numberOfWins")
+                team2.Player2?.incrementKey("numberOfGames")
+                refreshScorePointsForPlayer(team2.Player2!)
+            }
+            
         }
         
-        refreshScorePointsForPlayer(team1.Player1!)
-        refreshScorePointsForPlayer(team1.Player2!)
-        
-        refreshScorePointsForPlayer(team2.Player1!)
-        refreshScorePointsForPlayer(team2.Player2!)
         match.save()
     }
     
@@ -361,16 +375,12 @@ class GameManager: NSObject, GameManagerProtocol {
         
         let newScore = player.numberOfWins.integerValue - player.numberOfDefeat.integerValue
         player.kickerPoints = NSNumber(integer: newScore)
-        player.ACL = PFACL(user: PFUser.currentUser()!)
         player.save()
     }
     
     func fetchObject(obj: PFObject?) -> PFObject {
         
         if let object = obj {
-            let pfacl = PFACL(user: PFUser.currentUser()!)
-            pfacl.setReadAccess(true, forUser: PFUser.currentUser()!)
-            obj?.ACL = pfacl
             obj?.fetchIfNeeded()
             
         }
