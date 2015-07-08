@@ -9,9 +9,16 @@
 import Foundation
 
 
-@objc class RankingManager: RankingProtocol {
+
+@objc protocol RankingProtocol {
     
+    func getPlayerScoreRanking() -> Array<Player>
     
+    func getTeamScoreRanking() ->Array<Team>
     
+    func getMostGamesRanking() -> Array<Player>
     
+    func getWorstTeamRanking() -> Array<Team>
+    
+    func getPlayerWinRanking() -> Array<Player>
 }

@@ -18,7 +18,7 @@ import Parse
         challenges = getChallenges()
         println(challenges?.count)
         UIApplication.sharedApplication().applicationIconBadgeNumber = challenges!.count
-        //self.dumpChallenges()
+        self.dumpChallenges()
     }
     
     func broadcastChallenge() {

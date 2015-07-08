@@ -152,11 +152,6 @@ import Parse
         }
     }
     
-    func updatePlayerStats() {
-        
-        
-        
-    }
     
     func getPlayerList() -> Array<Player> {
         if(_playerList != nil) {
@@ -168,9 +163,6 @@ import Parse
             _playerList = query.findObjects() as? Array<Player>
             return _playerList!
         }
-        
-
-        
     }
     
     func getUserWithID(idString: String, finished: (PFObject) -> ()) {

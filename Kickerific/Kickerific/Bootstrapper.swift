@@ -17,6 +17,7 @@ public class Bootstrapper {
         ServiceLocator.sharedInstance.set(GameManagerProtocol.self, instance:GameManager())
         ServiceLocator.sharedInstance.set(ChallengeProtocol.self, instance: ChallengeManager())
         ServiceLocator.sharedInstance.set(StorageManagerProtocol.self, instance: StorageManager())
+        ServiceLocator.sharedInstance.set(RankingProtocol.self, instance: RankingManager())
     }
     
     public static func initializeParseFunctions() {
@@ -57,9 +58,9 @@ public class Bootstrapper {
         }
     }
     
-    class var Ranking: ChallengeProtocol {
+    class var Ranking: RankingProtocol {
         get {
-            return ServiceLocator.sharedInstance.get(ChallengeProtocol.self) as! ChallengeProtocol
+            return ServiceLocator.sharedInstance.get(RankingProtocol.self) as! RankingProtocol
         }
     }
 
