@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class MatchTableViewCell: UITableViewCell {
-        
+    
     @IBOutlet var teamname1: UILabel?
     @IBOutlet var teamname2: UILabel?
         

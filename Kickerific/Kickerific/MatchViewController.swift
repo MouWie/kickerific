@@ -161,5 +161,13 @@ class MatchViewController: UITableViewController{
 
     }
     
+    @IBAction func createNewMatch(sender: AnyObject) {
+        
+        let team1 = gameManager.createTeamFromArray([userManager.getCurrentPlayer()!])
+        let team2 = gameManager.createTeamFromArray([userManager.getCurrentPlayer()!])
+        gameManager.createGame(team1, team2: team2) { (success) -> () in
+            self.tableView.reloadData()
+        }
+    }
 
 }
