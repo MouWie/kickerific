@@ -336,22 +336,30 @@ class GameManager: NSObject, GameManagerProtocol {
                 refreshScorePointsForPlayer(team1.Player2!)
             }
             team2.incrementKey("Losses", byAmount: NSNumber(integer: -1))
-            team2.Player1?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+            if((team2.Player1?.numberOfDefeat)?.integerValue > 0) {
+                team2.Player1?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+            }
             team2.Player1?.incrementKey("numberOfGames")
             refreshScorePointsForPlayer(team2.Player1!)
             if (team2.Player1?.name != team2.Player2?.name) {
-                team2.Player2?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+                if((team2.Player2?.numberOfDefeat)?.integerValue > 0) {
+                    team2.Player2?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+                }
                 team2.Player2?.incrementKey("numberOfGames")
                 refreshScorePointsForPlayer(team2.Player2!)
             }
         }
         else if (match.team1Score.integerValue < match.team2Score.integerValue) {
             team1.incrementKey("numberOfDefeat")
-            team1.Player1?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+            if((team1.Player1?.numberOfDefeat)?.integerValue > 0) {
+                team1.Player1?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+            }
             team1.Player1?.incrementKey("numberOfGames")
             refreshScorePointsForPlayer(team1.Player1!)
             if(team1.Player1?.name != team1.Player2?.name) {
-                team1.Player2?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+                if((team1.Player2?.numberOfDefeat)?.integerValue > 0) {
+                    team1.Player2?.incrementKey("numberOfDefeat", byAmount: NSNumber(integer: -1))
+                }
                 team1.Player2?.incrementKey("numberOfGames")
                 refreshScorePointsForPlayer(team1.Player2!)
             }
