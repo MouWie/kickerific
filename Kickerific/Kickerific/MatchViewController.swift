@@ -28,6 +28,7 @@ class MatchViewController: UITableViewController{
         
         
         self.navigationController?.navigationItem.hidesBackButton = true
+        navigationController?.navigationBar.translucent = false
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -10,7 +10,7 @@
             <objects>
                 <tableViewController id="rHa-2N-h4C" customClass="MatchViewController" customModule="Kickerific" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="59" sectionHeaderHeight="22" sectionFooterHeight="22" id="Fb8-ve-bjC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.23021227904040409" green="0.23021227904040409" blue="0.23021227904040409" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.12900489267676762" green="0.12900489267676762" blue="0.12900489267676762" alpha="1" colorSpace="calibratedRGB"/>
